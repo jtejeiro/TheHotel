@@ -29,6 +29,29 @@ struct FormTextDataCamp:View {
     }
 }
 
+struct FormSecureFieldCamp:View {
+    @EnvironmentObject var model: FormDataModel
+    
+    var body: some View {
+        FormSecureField(inputText: $model.inputText,placeHolder: model.getPlaceholder(),keyboardType: getTypekeyboard(), disabled: $model.isDisabled , isError: $model.iSErrorBox,limiteChart: model.limitChart)
+            .onChange(of: model.inputText) {oldValue, value in
+                debugPrint(model.inputText)
+            }
+    }
+    
+    func getTypekeyboard()-> UIKeyboardType {
+        switch model.typeTextfield {
+        case .Text:
+            return .default
+        case .number:
+            return .numberPad
+        case .email:
+            return .emailAddress
+        }
+    }
+}
+
+
 struct FormSpinnerCamp:View {
     @EnvironmentObject var model: FormDataModel
     @State var isPopup: Bool = false
@@ -53,29 +76,27 @@ struct FormSpinnerCamp:View {
     }
 }
 
-struct FormGridCamp:View {
+
+struct FormDateCamp:View {
     @EnvironmentObject var model: FormDataModel
     @State var isPopup: Bool = false
-    @State var index: Int = 999
-    
+    @State var date: Date = Date.now
+    var timetype:FormDateTimeTypes = .all
     
     var body: some View {
         FormTextNoEditView(inputText: $model.inputText, placeHolder: model.getPlaceholder(),isDisabled: $model.isDisabled, isError: $model.iSErrorBox)
             .simultaneousGesture(TapGesture().onEnded({
                 if !model.isDisabled {
-                    if model.listFormString.count != 0 {
-                        isPopup.toggle()
-                    }
+                    isPopup.toggle()
                 }
              }))
                 .fullScreenCover(isPresented: $isPopup) {
-                FormPopupGrid(isClose: $isPopup, index: $index, titleBox: model.titleBox, list: model.listFormString)
-            }.onChange(of: index) { old, value in
-                model.inputText = model.listFormString[value].name
+                    FormPopupDate(isClose: $isPopup, date: $date, titleBox: model.titleBox, timetype: timetype)
+            }.onChange(of: date) { old, value in
+                model.inputText = date.toString(format: "dd EEEE yyyy")
+                model.inputDate = date
                 debugPrint(model.inputText)
             }
     }
 }
-
-
 

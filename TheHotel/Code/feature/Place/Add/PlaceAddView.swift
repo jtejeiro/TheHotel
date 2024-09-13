@@ -10,7 +10,6 @@ import SwiftUI
 struct PlaceAddView: View {
     @State var viewModel: PlaceAddViewModel
     @State public var hiddenBackButton: Bool = false
-    @State var showMainView: Bool = false
     
     init() {
         let viewModel = PlaceAddViewModel()
@@ -18,7 +17,7 @@ struct PlaceAddView: View {
     }
     
     var body: some View {
-        NavegationBarView(hiddenBackButton: $hiddenBackButton) {
+        NavegationBarView($hiddenBackButton) {
             ZStack {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
@@ -66,7 +65,9 @@ struct PlaceAddView: View {
     
     var ButtonSaveMenu: some View {
         Button {
-            showMainView.toggle()
+            Task {
+                await viewModel.fechSaveData()
+            }
         } label: {
             ZStack {
                 HStack(spacing: 20) {
@@ -90,8 +91,8 @@ struct PlaceAddView: View {
             .padding(.vertical,10)
             .padding(.horizontal,20)
         }
-        .navigationDestination(isPresented: $showMainView) {
-            MainView()
+        .navigationDestination(isPresented: $viewModel.showMainView) {
+            MenuAddView()
         }
     }
     

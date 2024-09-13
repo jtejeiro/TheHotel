@@ -7,20 +7,101 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46A3A11D2C918C9000B4AC50 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3A11C2C918C9000B4AC50 /* MenuModel.swift */; };
+		46A3A11F2C919BE400B4AC50 /* MenuAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3A11E2C919BE400B4AC50 /* MenuAddView.swift */; };
+		46A8FF152C92590900D89750 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF142C92590900D89750 /* LoginView.swift */; };
+		46A8FF172C92593600D89750 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF162C92593600D89750 /* LoginViewModel.swift */; };
+		46A8FF192C9261EA00D89750 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46A8FF182C9261EA00D89750 /* GoogleService-Info.plist */; };
+		46A8FF1C2C92657800D89750 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF1B2C92657800D89750 /* Globals.swift */; };
+		46A8FF252C92D17C00D89750 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46A8FF1D2C92D08B00D89750 /* Config.plist */; };
+		46A8FF262C92D3E100D89750 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF1E2C92D08B00D89750 /* NetworkConstants.swift */; };
+		46A8FF272C92D3E700D89750 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF212C92D15600D89750 /* NetworkError.swift */; };
+		46A8FF282C92D3EA00D89750 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF222C92D15600D89750 /* RequestModel.swift */; };
+		46A8FF292C92D3EE00D89750 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF232C92D15600D89750 /* ServiceLayer.swift */; };
+		46A8FF2C2C92D91900D89750 /* WeatherInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF2B2C92D91900D89750 /* WeatherInteractor.swift */; };
+		46A8FF2E2C92D94300D89750 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF2D2C92D94300D89750 /* WeatherModel.swift */; };
+		46A8FF312C92E83E00D89750 /* weathers.json in Resources */ = {isa = PBXBuildFile; fileRef = 46A8FF302C92E83E00D89750 /* weathers.json */; };
+		46A8FF332C92EABA00D89750 /* weatherStatusLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF322C92EABA00D89750 /* weatherStatusLogic.swift */; };
+		46A8FF352C939F7B00D89750 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF342C939F7B00D89750 /* MainViewModel.swift */; };
+		46A8FF382C94911B00D89750 /* WeatherMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF372C94911B00D89750 /* WeatherMapView.swift */; };
+		46A8FF3A2C94977400D89750 /* WeatherMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF392C94977400D89750 /* WeatherMapViewModel.swift */; };
 		46CF3E1E2C8EF798003076BF /* TheHotelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E1D2C8EF798003076BF /* TheHotelApp.swift */; };
 		46CF3E202C8EF798003076BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E1F2C8EF798003076BF /* ContentView.swift */; };
-		46CF3E222C8EF798003076BF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E212C8EF798003076BF /* Item.swift */; };
 		46CF3E242C8EF79A003076BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46CF3E232C8EF79A003076BF /* Assets.xcassets */; };
 		46CF3E272C8EF79A003076BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46CF3E262C8EF79A003076BF /* Preview Assets.xcassets */; };
+		46CF3E332C8F06EE003076BF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46CF3E322C8F06EE003076BF /* Launch Screen.storyboard */; };
+		46CF3E3B2C8F0AEE003076BF /* MenuTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E3A2C8F0AEE003076BF /* MenuTableModel.swift */; };
+		46CF3E3D2C8F0B0F003076BF /* PlaceTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E3C2C8F0B0E003076BF /* PlaceTableModel.swift */; };
+		46CF3E3F2C8F0FED003076BF /* MenuTableLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E3E2C8F0FED003076BF /* MenuTableLogic.swift */; };
+		46CF3E402C8F11EB003076BF /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E362C8F096F003076BF /* DatabaseService.swift */; };
+		46CF3E412C8F11EE003076BF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E392C8F0A17003076BF /* Utils.swift */; };
+		46CF3E442C8F1329003076BF /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E432C8F1323003076BF /* BaseViewModel.swift */; };
+		46CF3E492C8F1512003076BF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E482C8F1512003076BF /* MainView.swift */; };
+		46CF3E4C2C8F15B1003076BF /* MenuListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E4B2C8F15B1003076BF /* MenuListView.swift */; };
+		46CF3E4E2C8F1C0A003076BF /* MyNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E4D2C8F1C0A003076BF /* MyNavigation.swift */; };
+		46CF3E5D2C8F695D003076BF /* NavegationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E5C2C8F695D003076BF /* NavegationBarView.swift */; };
+		46CF3E5F2C8F71AA003076BF /* MenuAddModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E5E2C8F71AA003076BF /* MenuAddModelView.swift */; };
+		46CF3E612C8F72DF003076BF /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E592C8F5134003076BF /* FormDataModel.swift */; };
+		46CF3E622C8F72E3003076BF /* FormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E542C8F5134003076BF /* FormContentView.swift */; };
+		46CF3E632C8F72E7003076BF /* FormPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E552C8F5134003076BF /* FormPopupView.swift */; };
+		46CF3E642C8F72EA003076BF /* FormTextDataCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E562C8F5134003076BF /* FormTextDataCamp.swift */; };
+		46CF3E652C8F72ED003076BF /* FormTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E572C8F5134003076BF /* FormTextView.swift */; };
+		46CF3E692C8FA1F4003076BF /* ExtDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E682C8FA1F4003076BF /* ExtDate.swift */; };
+		46CF3E6C2C8FBE82003076BF /* PlaceAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E6B2C8FBE82003076BF /* PlaceAddViewModel.swift */; };
+		46CF3E6E2C9058C1003076BF /* PlaceAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E6D2C9058C1003076BF /* PlaceAddView.swift */; };
+		46CF3E722C906C8E003076BF /* PlaceTableLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E712C906C8E003076BF /* PlaceTableLogic.swift */; };
+		46CF3E752C909530003076BF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 46CF3E742C909530003076BF /* FirebaseAuth */; };
+		46CF3E772C909ECA003076BF /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E762C909ECA003076BF /* PlaceModel.swift */; };
+		46F5D8012C9100EB002FFED3 /* MenuListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5D8002C9100EB002FFED3 /* MenuListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46A3A11C2C918C9000B4AC50 /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
+		46A3A11E2C919BE400B4AC50 /* MenuAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddView.swift; sourceTree = "<group>"; };
+		46A8FF142C92590900D89750 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		46A8FF162C92593600D89750 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		46A8FF182C9261EA00D89750 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		46A8FF1B2C92657800D89750 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		46A8FF1D2C92D08B00D89750 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		46A8FF1E2C92D08B00D89750 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		46A8FF212C92D15600D89750 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		46A8FF222C92D15600D89750 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
+		46A8FF232C92D15600D89750 /* ServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
+		46A8FF2B2C92D91900D89750 /* WeatherInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInteractor.swift; sourceTree = "<group>"; };
+		46A8FF2D2C92D94300D89750 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		46A8FF302C92E83E00D89750 /* weathers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = weathers.json; sourceTree = "<group>"; };
+		46A8FF322C92EABA00D89750 /* weatherStatusLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherStatusLogic.swift; sourceTree = "<group>"; };
+		46A8FF342C939F7B00D89750 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		46A8FF372C94911B00D89750 /* WeatherMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMapView.swift; sourceTree = "<group>"; };
+		46A8FF392C94977400D89750 /* WeatherMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMapViewModel.swift; sourceTree = "<group>"; };
 		46CF3E1A2C8EF798003076BF /* TheHotel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheHotel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CF3E1D2C8EF798003076BF /* TheHotelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheHotelApp.swift; sourceTree = "<group>"; };
 		46CF3E1F2C8EF798003076BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		46CF3E212C8EF798003076BF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		46CF3E232C8EF79A003076BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46CF3E262C8EF79A003076BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		46CF3E322C8F06EE003076BF /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		46CF3E362C8F096F003076BF /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		46CF3E392C8F0A17003076BF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		46CF3E3A2C8F0AEE003076BF /* MenuTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableModel.swift; sourceTree = "<group>"; };
+		46CF3E3C2C8F0B0E003076BF /* PlaceTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableModel.swift; sourceTree = "<group>"; };
+		46CF3E3E2C8F0FED003076BF /* MenuTableLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableLogic.swift; sourceTree = "<group>"; };
+		46CF3E432C8F1323003076BF /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		46CF3E482C8F1512003076BF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		46CF3E4B2C8F15B1003076BF /* MenuListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListView.swift; sourceTree = "<group>"; };
+		46CF3E4D2C8F1C0A003076BF /* MyNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigation.swift; sourceTree = "<group>"; };
+		46CF3E542C8F5134003076BF /* FormContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormContentView.swift; sourceTree = "<group>"; };
+		46CF3E552C8F5134003076BF /* FormPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPopupView.swift; sourceTree = "<group>"; };
+		46CF3E562C8F5134003076BF /* FormTextDataCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextDataCamp.swift; sourceTree = "<group>"; };
+		46CF3E572C8F5134003076BF /* FormTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextView.swift; sourceTree = "<group>"; };
+		46CF3E592C8F5134003076BF /* FormDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataModel.swift; sourceTree = "<group>"; };
+		46CF3E5C2C8F695D003076BF /* NavegationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavegationBarView.swift; sourceTree = "<group>"; };
+		46CF3E5E2C8F71AA003076BF /* MenuAddModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddModelView.swift; sourceTree = "<group>"; };
+		46CF3E682C8FA1F4003076BF /* ExtDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtDate.swift; sourceTree = "<group>"; };
+		46CF3E6B2C8FBE82003076BF /* PlaceAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddViewModel.swift; sourceTree = "<group>"; };
+		46CF3E6D2C9058C1003076BF /* PlaceAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddView.swift; sourceTree = "<group>"; };
+		46CF3E712C906C8E003076BF /* PlaceTableLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableLogic.swift; sourceTree = "<group>"; };
+		46CF3E762C909ECA003076BF /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		46F5D8002C9100EB002FFED3 /* MenuListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,12 +109,66 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46CF3E752C909530003076BF /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46A8FF132C9258EA00D89750 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				46A8FF142C92590900D89750 /* LoginView.swift */,
+				46A8FF162C92593600D89750 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		46A8FF1F2C92D08B00D89750 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				46A8FF1D2C92D08B00D89750 /* Config.plist */,
+				46A8FF1E2C92D08B00D89750 /* NetworkConstants.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		46A8FF242C92D15600D89750 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				46A8FF212C92D15600D89750 /* NetworkError.swift */,
+				46A8FF222C92D15600D89750 /* RequestModel.swift */,
+				46A8FF232C92D15600D89750 /* ServiceLayer.swift */,
+			);
+			path = ServiceLayer;
+			sourceTree = "<group>";
+		};
+		46A8FF2A2C92D6F800D89750 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				46A8FF2B2C92D91900D89750 /* WeatherInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		46A8FF2F2C92E80C00D89750 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				46A8FF302C92E83E00D89750 /* weathers.json */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		46A8FF362C94906800D89750 /* weatherMap */ = {
+			isa = PBXGroup;
+			children = (
+				46A8FF372C94911B00D89750 /* WeatherMapView.swift */,
+				46A8FF392C94977400D89750 /* WeatherMapViewModel.swift */,
+			);
+			path = weatherMap;
+			sourceTree = "<group>";
+		};
 		46CF3E112C8EF798003076BF = {
 			isa = PBXGroup;
 			children = (
@@ -53,9 +188,11 @@
 		46CF3E1C2C8EF798003076BF /* TheHotel */ = {
 			isa = PBXGroup;
 			children = (
+				46CF3E2D2C8F0620003076BF /* Code */,
+				46CF3E342C8F08C5003076BF /* Resources */,
 				46CF3E1D2C8EF798003076BF /* TheHotelApp.swift */,
 				46CF3E1F2C8EF798003076BF /* ContentView.swift */,
-				46CF3E212C8EF798003076BF /* Item.swift */,
+				46CF3E322C8F06EE003076BF /* Launch Screen.storyboard */,
 				46CF3E232C8EF79A003076BF /* Assets.xcassets */,
 				46CF3E252C8EF79A003076BF /* Preview Content */,
 			);
@@ -68,6 +205,175 @@
 				46CF3E262C8EF79A003076BF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		46CF3E2D2C8F0620003076BF /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E2F2C8F0680003076BF /* Utils */,
+				46CF3E352C8F0913003076BF /* DataBaseServices */,
+				46A8FF1F2C92D08B00D89750 /* Config */,
+				46A8FF242C92D15600D89750 /* ServiceLayer */,
+				46CF3E382C8F09D1003076BF /* Entities */,
+				46A8FF2A2C92D6F800D89750 /* Interactor */,
+				46CF3E372C8F0987003076BF /* ModelLogic */,
+				46CF3E2E2C8F0666003076BF /* feature */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		46CF3E2E2C8F0666003076BF /* feature */ = {
+			isa = PBXGroup;
+			children = (
+				46A8FF132C9258EA00D89750 /* Login */,
+				46CF3E462C8F1374003076BF /* Main */,
+				46CF3E422C8F12C9003076BF /* Base */,
+				46CF3E452C8F134E003076BF /* Menu */,
+				46CF3E6A2C8FB640003076BF /* Place */,
+				46A8FF362C94906800D89750 /* weatherMap */,
+			);
+			path = feature;
+			sourceTree = "<group>";
+		};
+		46CF3E2F2C8F0680003076BF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E392C8F0A17003076BF /* Utils.swift */,
+				46CF3E682C8FA1F4003076BF /* ExtDate.swift */,
+				46A8FF1B2C92657800D89750 /* Globals.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		46CF3E342C8F08C5003076BF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				46A8FF2F2C92E80C00D89750 /* Mock */,
+				46A8FF182C9261EA00D89750 /* GoogleService-Info.plist */,
+				46CF3E4D2C8F1C0A003076BF /* MyNavigation.swift */,
+				46CF3E5C2C8F695D003076BF /* NavegationBarView.swift */,
+				46CF3E5B2C8F5134003076BF /* Form */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		46CF3E352C8F0913003076BF /* DataBaseServices */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E362C8F096F003076BF /* DatabaseService.swift */,
+			);
+			path = DataBaseServices;
+			sourceTree = "<group>";
+		};
+		46CF3E372C8F0987003076BF /* ModelLogic */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E3E2C8F0FED003076BF /* MenuTableLogic.swift */,
+				46CF3E712C906C8E003076BF /* PlaceTableLogic.swift */,
+				46A8FF322C92EABA00D89750 /* weatherStatusLogic.swift */,
+			);
+			path = ModelLogic;
+			sourceTree = "<group>";
+		};
+		46CF3E382C8F09D1003076BF /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E3A2C8F0AEE003076BF /* MenuTableModel.swift */,
+				46CF3E3C2C8F0B0E003076BF /* PlaceTableModel.swift */,
+				46CF3E762C909ECA003076BF /* PlaceModel.swift */,
+				46A3A11C2C918C9000B4AC50 /* MenuModel.swift */,
+				46A8FF2D2C92D94300D89750 /* WeatherModel.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		46CF3E422C8F12C9003076BF /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E432C8F1323003076BF /* BaseViewModel.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		46CF3E452C8F134E003076BF /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				46F5D7FF2C90FC86002FFED3 /* List */,
+				46CF3E602C8F71E9003076BF /* Add */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		46CF3E462C8F1374003076BF /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E482C8F1512003076BF /* MainView.swift */,
+				46A8FF342C939F7B00D89750 /* MainViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		46CF3E582C8F5134003076BF /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E542C8F5134003076BF /* FormContentView.swift */,
+				46CF3E552C8F5134003076BF /* FormPopupView.swift */,
+				46CF3E562C8F5134003076BF /* FormTextDataCamp.swift */,
+				46CF3E572C8F5134003076BF /* FormTextView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		46CF3E5A2C8F5134003076BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E592C8F5134003076BF /* FormDataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		46CF3E5B2C8F5134003076BF /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E582C8F5134003076BF /* Component */,
+				46CF3E5A2C8F5134003076BF /* Model */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		46CF3E602C8F71E9003076BF /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E5E2C8F71AA003076BF /* MenuAddModelView.swift */,
+				46A3A11E2C919BE400B4AC50 /* MenuAddView.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		46CF3E6A2C8FB640003076BF /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E702C906C21003076BF /* Add */,
+			);
+			path = Place;
+			sourceTree = "<group>";
+		};
+		46CF3E702C906C21003076BF /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E6B2C8FBE82003076BF /* PlaceAddViewModel.swift */,
+				46CF3E6D2C9058C1003076BF /* PlaceAddView.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		46F5D7FF2C90FC86002FFED3 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				46CF3E4B2C8F15B1003076BF /* MenuListView.swift */,
+				46F5D8002C9100EB002FFED3 /* MenuListViewModel.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,6 +392,9 @@
 			dependencies = (
 			);
 			name = TheHotel;
+			packageProductDependencies = (
+				46CF3E742C909530003076BF /* FirebaseAuth */,
+			);
 			productName = TheHotel;
 			productReference = 46CF3E1A2C8EF798003076BF /* TheHotel.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +423,9 @@
 				Base,
 			);
 			mainGroup = 46CF3E112C8EF798003076BF;
+			packageReferences = (
+				46CF3E732C90952F003076BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 46CF3E1B2C8EF798003076BF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -128,7 +440,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46CF3E332C8F06EE003076BF /* Launch Screen.storyboard in Resources */,
+				46A8FF192C9261EA00D89750 /* GoogleService-Info.plist in Resources */,
+				46A8FF312C92E83E00D89750 /* weathers.json in Resources */,
 				46CF3E272C8EF79A003076BF /* Preview Assets.xcassets in Resources */,
+				46A8FF252C92D17C00D89750 /* Config.plist in Resources */,
 				46CF3E242C8EF79A003076BF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,9 +456,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46CF3E3D2C8F0B0F003076BF /* PlaceTableModel.swift in Sources */,
+				46A3A11F2C919BE400B4AC50 /* MenuAddView.swift in Sources */,
+				46CF3E652C8F72ED003076BF /* FormTextView.swift in Sources */,
+				46CF3E402C8F11EB003076BF /* DatabaseService.swift in Sources */,
+				46A8FF382C94911B00D89750 /* WeatherMapView.swift in Sources */,
+				46CF3E6E2C9058C1003076BF /* PlaceAddView.swift in Sources */,
+				46A8FF272C92D3E700D89750 /* NetworkError.swift in Sources */,
 				46CF3E202C8EF798003076BF /* ContentView.swift in Sources */,
-				46CF3E222C8EF798003076BF /* Item.swift in Sources */,
+				46A8FF2C2C92D91900D89750 /* WeatherInteractor.swift in Sources */,
+				46A8FF282C92D3EA00D89750 /* RequestModel.swift in Sources */,
+				46CF3E642C8F72EA003076BF /* FormTextDataCamp.swift in Sources */,
+				46CF3E492C8F1512003076BF /* MainView.swift in Sources */,
+				46A3A11D2C918C9000B4AC50 /* MenuModel.swift in Sources */,
+				46CF3E632C8F72E7003076BF /* FormPopupView.swift in Sources */,
+				46CF3E3B2C8F0AEE003076BF /* MenuTableModel.swift in Sources */,
+				46CF3E6C2C8FBE82003076BF /* PlaceAddViewModel.swift in Sources */,
+				46A8FF262C92D3E100D89750 /* NetworkConstants.swift in Sources */,
+				46CF3E442C8F1329003076BF /* BaseViewModel.swift in Sources */,
+				46CF3E5F2C8F71AA003076BF /* MenuAddModelView.swift in Sources */,
+				46CF3E4C2C8F15B1003076BF /* MenuListView.swift in Sources */,
+				46A8FF352C939F7B00D89750 /* MainViewModel.swift in Sources */,
+				46A8FF2E2C92D94300D89750 /* WeatherModel.swift in Sources */,
+				46A8FF1C2C92657800D89750 /* Globals.swift in Sources */,
+				46A8FF292C92D3EE00D89750 /* ServiceLayer.swift in Sources */,
+				46CF3E722C906C8E003076BF /* PlaceTableLogic.swift in Sources */,
+				46CF3E3F2C8F0FED003076BF /* MenuTableLogic.swift in Sources */,
+				46CF3E622C8F72E3003076BF /* FormContentView.swift in Sources */,
+				46CF3E5D2C8F695D003076BF /* NavegationBarView.swift in Sources */,
+				46CF3E772C909ECA003076BF /* PlaceModel.swift in Sources */,
+				46A8FF172C92593600D89750 /* LoginViewModel.swift in Sources */,
 				46CF3E1E2C8EF798003076BF /* TheHotelApp.swift in Sources */,
+				46A8FF3A2C94977400D89750 /* WeatherMapViewModel.swift in Sources */,
+				46A8FF152C92590900D89750 /* LoginView.swift in Sources */,
+				46CF3E412C8F11EE003076BF /* Utils.swift in Sources */,
+				46CF3E612C8F72DF003076BF /* FormDataModel.swift in Sources */,
+				46CF3E4E2C8F1C0A003076BF /* MyNavigation.swift in Sources */,
+				46A8FF332C92EABA00D89750 /* weatherStatusLogic.swift in Sources */,
+				46CF3E692C8FA1F4003076BF /* ExtDate.swift in Sources */,
+				46F5D8012C9100EB002FFED3 /* MenuListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +634,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -291,6 +644,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = jt.TheHotel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -311,6 +668,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,6 +678,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = jt.TheHotel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -348,6 +710,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		46CF3E732C90952F003076BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		46CF3E742C909530003076BF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46CF3E732C90952F003076BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46CF3E122C8EF798003076BF /* Project object */;
 }

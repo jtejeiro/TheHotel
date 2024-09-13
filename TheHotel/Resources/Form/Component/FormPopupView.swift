@@ -16,7 +16,7 @@ struct FormPopupView<Content: View>: View  {
     
     var body: some View {
         ZStack(alignment:.center ) {
-            Color.mavelGray
+            Color.green
                 .ignoresSafeArea(.all)
                 .opacity(0.5).onTapGesture {
                     isClose.toggle()
@@ -31,7 +31,7 @@ struct FormPopupView<Content: View>: View  {
                         .padding()
                     Spacer()
                 }
-                .background(.marvelRed)
+                .background(.green)
                 ZStack {
                     content()
                 }
@@ -75,7 +75,7 @@ struct FormPopupList:View {
                         .id(index)
                         .hoverEffect()
                         
-                        Color.mavelGray
+                        Color.green
                             .frame(height:1)
                             .opacity(0.6)
                             .padding(.horizontal,10)
@@ -100,84 +100,6 @@ struct FormPopupList:View {
             
 }
 
-
-struct FormPopupGrid:View {
-    @Binding var isClose:Bool
-    @Binding var index:Int
-    let titleBox:String
-    let list:[ListFormString]
-    
-    let columns = [
-            GridItem(.adaptive(minimum: 90))
-        ]
-    
-    var body: some View {
-        FormPopupView(titleBox: titleBox, isClose: $isClose) {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(0..<list.count , id: \.self) { index in
-                        FormPopupCell(model: list[index])
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                withAnimation {
-                                    self.index = index
-                                    isClose.toggle()
-                                }
-                            }
-                            .id(index)
-                            .hoverEffect()
-                    }
-                }
-            }
-            .frame(height: getIdealHeight())
-        }
-    }
-    
-    
-    func getIdealHeight() -> CGFloat {
-       let height = ((40 * CGFloat(list.count + 1)) + 20)
-        debugPrint("getIdealHeight")
-        debugPrint(height)
-        if height < 400 {
-            return height
-        }
-        
-        return 400
-    }
-    
-    struct FormPopupCell: View {
-        let model: ListFormString
-        
-        var body: some View {
-            VStack(spacing: 0) {
-                RoundedRectangle(cornerRadius: 5.0)
-                    .foregroundColor(.white)
-                    .frame(width: 80, height: 80)
-                    .opacity(0.4)
-                    .overlay {
-                        Text(model.icono)
-                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                            .frame(width: 60, height: 60, alignment: .center)
-                    }
-                    .padding(.all,10)
-            
-                
-                Text(model.name)
-                    .font(.caption)
-                    .foregroundStyle(.black)
-                    .frame(width: 80 ,height: 50,alignment: .center)
-            }
-            .background {
-                RoundedRectangle(cornerRadius: 5.0)
-                    .foregroundColor(.black.opacity(0.2))
-            }
-            
-        }
-    }
-
-}
-
-
 enum FormDateTimeTypes {
     case BeforeNow
     case afterNow
@@ -191,10 +113,11 @@ struct FormPopupDate:View {
     var timetype:FormDateTimeTypes = .all
     
     let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            return formatter
-        }()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.locale = Locale(identifier: "es_ES")
+        return formatter
+    }()
 
     
     var body: some View {
@@ -205,7 +128,7 @@ struct FormPopupDate:View {
                 case .BeforeNow:
                     DatePicker(titleBox, selection: $date,in: Date.now...,displayedComponents: .date)
                         .datePickerStyle(GraphicalDatePickerStyle())
-                                    .frame(maxHeight: 400)
+                                    .frame(maxHeight: 350)
                 case .afterNow:
                     let currentDate = Date()
                     let eighteenYearsAgo = Calendar.current.date(byAdding: .year, value: -18, to: currentDate)!
@@ -221,9 +144,9 @@ struct FormPopupDate:View {
                 Button {
                     isClose.toggle()
                 } label: {
-                    Text("Alert_box_button_ok")
-                        .font(.system(size: 17,weight: .heavy))
-                        .foregroundStyle(.marvelRed)
+                    Text("Selecciona el dia del menu")
+                        .font(.system(size: 17,weight: .bold))
+                        .foregroundStyle(.green)
                         .hoverEffect(/*@START_MENU_TOKEN@*/.automatic/*@END_MENU_TOKEN@*/)
                         .padding()
                 }

@@ -6,12 +6,11 @@
 //
 
 import Foundation
-
 import SwiftData
 
 @Observable
 class DatabaseService {
-    let container = try! ModelContainer(for: UserCharactersModel.self,CharacterSavedDataModel.self )
+    let container = try! ModelContainer(for: MenuTableModel.self,PlaceTableModel.self )
     
     @MainActor
     var modelContext:ModelContext {

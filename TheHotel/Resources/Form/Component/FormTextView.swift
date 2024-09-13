@@ -24,7 +24,7 @@ struct FormTextView: View {
                 Text(placeHolder)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.system(size: 18))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                     .padding(.leading,10)
                     .frame(height: 15)
             }else {
@@ -32,7 +32,7 @@ struct FormTextView: View {
             }
             TextField(text: $inputText) {
                 Text(placeHolder)
-                    .foregroundStyle(isHover ? Color.clear: Color.white)
+                    .foregroundStyle(isHover ? Color.clear: Color.black)
                     .font(.system(size: 17))
                     .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
@@ -69,7 +69,7 @@ struct FormTextView: View {
                     }
                     
                     if keyboardType == .decimalPad || keyboardType == .numberPad {
-                        let filtered = inputValue.filter { Set(" 0123456789").contains($0) }
+                        let filtered = inputValue.filter { Set(" 0123456789,").contains($0) }
                         if filtered != inputValue {
                             self.inputText = filtered
                         }
@@ -97,7 +97,7 @@ struct FormTextNoEditView: View {
                 Text(placeHolder)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.system(size: 15))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                     .padding(.leading,10)
                     .frame(height: 15)
             }else {
@@ -105,7 +105,7 @@ struct FormTextNoEditView: View {
             }
             TextField(text: $inputText) {
                 Text(placeHolder)
-                    .foregroundStyle(isHover || inputText != "" ? Color.clear: Color.white)
+                    .foregroundStyle(isHover || inputText != "" ? Color.clear: Color.black)
                     .font(.system(size: 17))
                     .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
 
@@ -139,11 +139,11 @@ struct FormTextStyle:TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .padding(.all, 6)
-                .foregroundStyle(.white)
-                .background(isDisabled ?  RoundedRectangle(cornerRadius: 2).fill(.white.opacity(0.2)) : RoundedRectangle(cornerRadius: 2).fill(.clear))
+            .foregroundStyle(.black)
+                .background(isDisabled ?  RoundedRectangle(cornerRadius: 2).fill(.green.opacity(0.2)) : RoundedRectangle(cornerRadius: 2).fill(.clear))
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
-                        .stroke(isError ? Color.red : Color.white, lineWidth:1)
+                        .stroke(isError ? Color.red : Color.green, lineWidth:1)
                     )
         }
     
@@ -152,3 +152,75 @@ struct FormTextStyle:TextFieldStyle {
 
 
 
+struct FormSecureField: View {
+    @Binding var inputText: String
+    var placeHolder: String = "placeHolder"
+    var keyboardType:UIKeyboardType = .default
+    @Binding var disabled:Bool
+    @Binding var isError:Bool
+    var limiteChart: Int = 0
+    @State private var isHover:Bool = false
+    @FocusState private var isTextFieldFocused: Bool
+    
+    var body: some View {
+        VStack {
+            if isHover || inputText != "" {
+                Text(placeHolder)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.system(size: 18))
+                    .foregroundStyle(.black)
+                    .padding(.leading,10)
+                    .frame(height: 15)
+            }else {
+                Spacer().frame(height: 15)
+            }
+            SecureField(text: $inputText) {
+                Text(placeHolder)
+                    .foregroundStyle(isHover ? Color.clear: Color.black)
+                    .font(.system(size: 17))
+                    .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+            }
+                .frame(height: 30)
+                .disabled(disabled)
+                .textFieldStyle(FormTextStyle(isError: isError,isDisabled: disabled))
+                .autocorrectionDisabled()
+                //.textInputAutocapitalization(.characters)
+                .disableAutocorrection(true)
+                .keyboardType(keyboardType)
+                .focused($isTextFieldFocused)
+                .onChange(of: isTextFieldFocused) { oldValue, newValue in
+                    if newValue {
+                        withAnimation {
+                            self.isHover = true
+                        }
+                    } else {
+                        if  inputText == "" {
+                            withAnimation {
+                                self.isHover = false
+                            }
+                        }else {
+                            withAnimation {
+                                self.isHover = true
+                            }
+                        }
+                    }
+                }
+                .onReceive(Just(inputText)) { inputValue in
+                    if limiteChart > 0 {
+                        if inputValue.count > limiteChart {
+                            self.inputText.removeLast()
+                        }
+                    }
+                    
+                    if keyboardType == .decimalPad || keyboardType == .numberPad {
+                        let filtered = inputValue.filter { Set(" 0123456789,").contains($0) }
+                        if filtered != inputValue {
+                            self.inputText = filtered
+                        }
+                    }
+                }
+            
+            
+        }.frame(height: 50)
+    }
+}

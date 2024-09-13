@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+class Globals {
+    static let sharer = Globals()
+    var userName:String = "Usuario"
+}

@@ -1,5 +1,5 @@
 //
-//  MenuView.swift
+//  MenuListView.swift
 //  TheHotel
 //
 //  Created by Jaime Tejeiro on 9/9/24.
@@ -8,38 +8,57 @@
 import SwiftUI
 
 struct MenuListView: View {
+    @State var viewModel: MenuListViewModel
     @State var showSecondView: Bool = false
     
+    init() {
+        let viewModel = MenuListViewModel()
+        self._viewModel =  State(wrappedValue: viewModel)
+    }
     
     var body: some View {
-        ZStack(alignment:.top) {
-            VStack(alignment: .center, spacing: 0)  {
-                HStack(alignment: .center) {
-                    Spacer()
-                    Text("El Restaurante")
-                        .font(.title)
-                        .foregroundStyle(.white)
-                    Spacer()
-                }.frame(height: 30)
-                 .background(Color.green)
-                 .padding(.all,20)
-                VStack(alignment: .center, spacing: 5) {
-                    Color.green.frame(height: 1)
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Text("Menu del día")
-                            .font(.title2)
-                            .foregroundStyle(.black)
-                        Spacer()
-                    }.frame(height: 30)
-                    Color.green.frame(height: 1)
-                }.padding(.all,20)
-                
-                MenuListView
-                ButtonEmptyView
+        NavegationBarView() {
+            ZStack(alignment:.top) {
+                ScrollView {
+                    VStack(alignment: .center, spacing: 0)  {
+                        HStack(alignment: .center) {
+                            Spacer()
+                            Text("El Restaurante")
+                                .font(.title)
+                                .foregroundStyle(.white)
+                            Spacer()
+                        }.frame(height: 30)
+                            .background(Color.green)
+                            .padding(.all,20)
+                        VStack(alignment: .center, spacing: 5) {
+                            Color.green.frame(height: 1)
+                            HStack(alignment: .center) {
+                                Spacer()
+                                Text("Menu del día")
+                                    .font(.title2)
+                                    .foregroundStyle(.black)
+                                Spacer()
+                            }.frame(height: 30)
+                            Color.green.frame(height: 1)
+                        }.padding(.all,20)
+                        
+                        VStack(spacing: 20) {
+                            MenuListCamp()
+                                .environment(viewModel)
+                            ButtonEmptyView
+                        }
+                        
+                        
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .top)
+                    .onAppear{
+                        Task {
+                            viewModel.configViewModel()
+                        }
+                    }
+                }
                 
             }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .top)
         }
     }
     
@@ -69,292 +88,91 @@ struct MenuListView: View {
             MenuAddView()
         }
     }
+
+}
+struct MenuListCamp: View {
+    @Environment(MenuListViewModel.self) var viewModel
     
-    var MenuListView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            
-            HStack(alignment: .center) {
-                Spacer()
-                Text("Lunes")
-                    .font(.title3)
-                Spacer()
-            }.background(Color.green)
-             .padding(.all,20)
-            HStack(alignment: .center) {
-                Spacer()
-                Text("Postre")
-                    .font(.callout)
+    fileprivate func headerCell(_ header: MenuModel) -> some View {
+        return HStack(alignment: .center) {
+            Spacer()
+            Text(header.getDay())
+                .font(.title3)
+                .foregroundStyle(.black)
+            Spacer()
+            Text(header.getDayWeek())
+                .font(.title3)
+                .foregroundStyle(.black)
+            Spacer()
+            Spacer()
+        }.background(Color.green)
+         .padding(.horizontal,20)
+    }
+    
+    fileprivate func headerBodyCell(_ cell: PlaceModel) -> some View {
+        return  HStack(alignment: .center) {
+            Spacer()
+            Text(cell.typePlace.localizable)
+                .font(.callout)
+                .bold()
+                .italic()
+                .foregroundStyle(.green)
+            Spacer()
+        }.padding(.horizontal, 10)
+    }
+    
+    fileprivate func bodyCell(_ cell: PlaceModel) -> some View {
+        return VStack(alignment: .leading, spacing: 5) {
+            HStack {
+                Text(cell.title)
+                    .font(.body)
                     .bold()
-                    .italic()
-                    .foregroundStyle(.green)
+                    .foregroundStyle(Color.black)
+                
                 Spacer()
-            }.padding(.vertical,20)
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        Text("Plato de comida")
-                            .font(.body)
-                            .bold()
-                        Spacer()
-                        Text("99.99 €")
-                            .font(.body)
-                            .italic()
-                    }
-                    Text("comentario co entario comentario coment, comentario co entario comentario coment")
-                        .font(.caption)
-                }
-                .padding(.horizontal,30)
-            
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Text("Plato de comida")
-                        .font(.body)
-                        .bold()
-                    Spacer()
-                    Text("99.99 €")
-                        .font(.body)
-                        .italic()
-                }
-                Text("comentario co entario comentario coment, comentario co entario comentario coment")
+                Text(cell.priceCoin)
+                    .font(.body)
+                    .italic()
+                    .foregroundStyle(Color.black)
+            }
+            if cell.comment != "" {
+                Text(cell.comment)
                     .font(.caption)
+                    .foregroundStyle(Color.black)
             }
-            .padding(.all,30)
-                
-                Color.black
-                    .frame(height: 1)
-                    .padding(.all,20)
-            }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         }
-}
-
-struct MenuAddView: View {
-    @State var viewModel: MenuAddModelView
-    @State public var hiddenBackButton: Bool = false
-    
-    init() {
-        let viewModel = MenuAddModelView()
-        self._viewModel =  State(wrappedValue: viewModel)
+        .padding(.horizontal,20)
     }
     
     var body: some View {
-        NavegationBarView(hiddenBackButton: $hiddenBackButton) {
-            ZStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Text("Crea Menú")
-                            .font(.title)
-                            .foregroundStyle(.white)
-                        Spacer()
-                    }.background(Color.green)
-                     .padding(.all,20)
+        VStack(spacing: 15) {
+            ForEach(viewModel.listMenuModel){ header in
+                self.headerCell(header)
+                
+                ForEach(header.listPlace.sorted(by: {$0.typePlace.position<$1.typePlace.position})){ cell in
                     
-                    FormDateCamp(timetype: .BeforeNow)
-                        .environmentObject(viewModel.getMenuFormList(.publicationDay))
-                        .padding(.all,20)
+                    let firstCategoriId = header.listPlace.first(where: {$0.typePlace == cell.typePlace})?.id ?? UUID()
                     
-                    PlaceListView()
-                        .environment(viewModel)
-                }
-                
-            }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-        }
-        .onAppear{
-            viewModel.configViewModel()
-        }
-    }
-}
-
-struct PlaceListView: View {
-    @Environment(MenuAddModelView.self) private var viewModel
-    
-    @State var showSecondView: Bool = false
-    
-    var body: some View {
-        VStack {
-            ZStack(alignment: .top) {
-                VStack {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Text("Platos")
-                            .font(.title)
-                            .foregroundStyle(.white)
-                        Spacer()
-                    }.background(Color.green)
-                        .padding(.vertical,10)
-                        .padding(.horizontal,20)
-                    ButtonAddPlace
-                    ListPlaceView.onAppear {
-                        Task {
-                            viewModel.placeTableLogic.getPlaceTableModel
-                        }
+                    if firstCategoriId == cell.id {
+                        self.headerBodyCell(cell)
                     }
-                }
-            }
-            ZStack(alignment: .bottom) {
-                ButtonSaveMenu
-            }
-        }
-    }
-    
-    var ButtonAddPlace: some View {
-        Button {
-            showSecondView.toggle()
-        } label: {
-            ZStack {
-                HStack(spacing: 20) {
-                    Spacer()
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .frame(width: 20,height: 20)
-                        .foregroundStyle(.green)
-
-                    Text("Crear un Plato")
-                        .font(.title2)
-                        .foregroundStyle(.green)
-                    Spacer()
-                }
-            }
-            .frame(height: 40)
-            .background {
-                RoundedRectangle(cornerRadius: 5.0)
-                    .stroke(lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.green)
-            }
-            .padding(.vertical,10)
-            .padding(.horizontal,20)
-        }
-        .navigationDestination(isPresented: $showSecondView) {
-            PlaceAddView()
-        }
-    }
-    
-    var ListPlaceView: some View {
-        FormListCamp()
-            .environment(viewModel.getMenuFormList(.listPlace))
-    }
-    
-    var ButtonSaveMenu: some View {
-        @Bindable var show = viewModel
-        
-        return Button {
-            Task {
-                await viewModel.fechSaveData()
-            }
-        } label: {
-            ZStack {
-                HStack(spacing: 20) {
-                    Spacer()
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .frame(width: 20,height: 20)
-                        .foregroundStyle(.white)
-
-                    Text("Cargar Menu ")
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                    Spacer()
-                }
-            }
-            .frame(height: 40)
-            .background {
-                RoundedRectangle(cornerRadius: 5.0)
-                    .foregroundColor(.green)
-            }
-            .padding(.vertical,10)
-            .padding(.horizontal,20)
-        }
-        .navigationDestination(isPresented: $show.showMainView) {
-            MainView()
-        }
-    }
-    
-}
-
-struct FormListCamp: View {
-    @Environment(MenuAddModelView.self) var viewModel
-    
-    var body: some View {
-        ScrollView {
-            ForEach(0..<viewModel.listPlaceModel.count, id: \.self){ model in
-                @Bindable var index = viewModel.listPlaceModel[model]
-                
-                let firstCategoriId = viewModel.listPlaceModel.first{$0.typePlace == index.typePlace}?.id ?? 0
-                
-                let lastCategoriId = viewModel.listPlaceModel.last{$0.typePlace == index.typePlace}?.id ?? 0
-                
-                VStack {
-                   if  firstCategoriId == index.id{
-                        HStack(alignment: .center) {
-                            Spacer()
-                            Text(index.typePlace.localizable)
-                                .font(.callout)
-                                .bold()
-                                .italic()
-                                .foregroundStyle(.green)
-                            Spacer()
-                        }.padding(.all, 10)
-                    }
-                    VStack  {
-                        Toggle(isOn: $index.isCheck) {
-                            VStack(alignment: .leading, spacing: 10) {
-                                HStack {
-                                    Text(index.title)
-                                        .font(.body)
-                                        .bold()
-                                        .foregroundStyle(Color.black)
-                                    
-                                    Spacer()
-                                    Text(index.priceCoin)
-                                        .font(.caption)
-                                        .italic()
-                                        .foregroundStyle(Color.black)
-                                }
-                                Text(index.comment)
-                                    .font(.caption)
-                                    .foregroundStyle(Color.black)
-                            }
+                    
+                    let lastCategoriId = header.listPlace.last(where: {$0.typePlace == cell.typePlace})?.id ?? UUID()
+                    
+                    self.bodyCell(cell)
+                    
+                    if lastCategoriId == cell.id {
+                        Color.black
+                            .frame(height: 1)
                             .padding(.horizontal,20)
-                        }.toggleStyle(FormCheckBoxTextView())
-                         .padding(.all,10)
-                           
-                        
-                        if lastCategoriId == index.id {
-                            Color.black
-                                .frame(height: 1)
-                                .padding(.all,20)
-                        }
                     }
                 }
             }
         }
     }
-    
 }
 
 
-
-
-struct FormCheckBoxTextView: ToggleStyle {
-    
-    func makeBody(configuration: Configuration) -> some View {
-        Button {
-            configuration.isOn.toggle()
-        } label: {
-            HStack
-            {
-                Image(systemName: configuration.isOn ? "checkmark.square.fill" : "checkmark.square")
-                    .resizable()
-                    .frame(width: 20,height: 20)
-                    .foregroundStyle(configuration.isOn ? Color.green: Color.black)
-                    .padding(.horizontal,10)
-                configuration.label
-            }
-        }
-    }
-}
 
 #Preview {
     MenuAddView()

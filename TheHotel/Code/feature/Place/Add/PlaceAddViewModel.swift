@@ -9,7 +9,13 @@ import Foundation
 
 @Observable
 final class PlaceAddViewModel:BaseViewModel {
+    let placeTableLogic : PlaceTableLogic
     var placeFormList: [FormDataModel]  = []
+    var showMainView: Bool = false
+    
+    init(placeTableLogic: PlaceTableLogic = PlaceTableLogic.sharer) {
+        self.placeTableLogic = placeTableLogic
+    }
     
     // MARK: - Config
     func configViewModel() {
@@ -29,8 +35,8 @@ final class PlaceAddViewModel:BaseViewModel {
         
         placeFormList.append(FormDataModel(id: .titlePlace , titleBox: "Titulo del plato", isRequire: true))
         placeFormList.append(FormDataModel(id: .commentPlace, titleBox: "Comentario del plato", isRequire: false))
-        placeFormList.append(FormDataModel(id: .typePlace, titleBox: "Selecciona la categoria de plato", isRequire: false, listFormString: TypePlace.getFormStringList()))
-        placeFormList.append(FormDataModel(id: .pricePlace, titleBox: "Precio", isRequire: true,typeTextfield: .number))
+        placeFormList.append(FormDataModel(id: .typePlace, titleBox: "Selecciona la categoria de plato", isRequire: true, listFormString: TypePlace.getFormStringList()))
+        placeFormList.append(FormDataModel(id: .pricePlace, titleBox: "Precio", isRequire: true,typeTextfield: .number,limitChart: 6))
     }
     
     func getPlaceFormList(_ type:FormDataTypes)-> FormDataModel{
@@ -40,14 +46,10 @@ final class PlaceAddViewModel:BaseViewModel {
         
         return list
     }
-    // MARK: - Load Data
-    func loadMenuFormList(_ id:Int) async {
-       
-    }
     
     // MARK: - Validate
     
-    func ValideMenuFormList() async -> Bool {
+    func ValidePlaceFormList() async -> Bool {
         var isValidate:Bool = true
         
         placeFormList.forEach { model in
@@ -62,4 +64,38 @@ final class PlaceAddViewModel:BaseViewModel {
         return isValidate
     }
     
+    // MARK: - Fech Save dat
+    func insertPlaceFormList() async {
+        let titlePlace =  self.getPlaceFormList(.titlePlace).inputText
+        let commentPlace =  self.getPlaceFormList(.commentPlace).inputText
+        let typePlace =  TypePlace.getLocalizable(text: self.getPlaceFormList(.typePlace).inputText)
+        let pricePlace = self.getPlaceFormList(.pricePlace).inputText
+        
+        
+        let placeTableList = PlaceTableModel(title: titlePlace , comment: commentPlace, typePlace: typePlace, price: pricePlace)
+        await placeTableLogic.insert(model: placeTableList)
+    }
+    
+    @MainActor
+    func fechSaveData(){
+        Task {
+            do {
+                self.displayLoading(true)
+                if await ValidePlaceFormList() {
+                    await insertPlaceFormList()
+                    showMainView.toggle()
+                    removePlaceFormList()
+                }
+                self.displayLoading()
+            }
+        }
+    }
+    
+    func removePlaceFormList(){
+        DispatchQueue.main.async {
+            self.placeFormList.forEach { model in
+                model.resetInputData()
+            }
+        }
+    }
 }

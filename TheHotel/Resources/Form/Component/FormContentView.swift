@@ -19,7 +19,7 @@ struct FormContentView<Content: View>: View {
                     HStack{
                         Text(titleBox)
                             .font(.title3)
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(Color.black)
                             .frame(minWidth: 0,maxWidth: .infinity,maxHeight:20,alignment: .leading)
                         Button {
                             ishiddenBox.toggle()
@@ -27,12 +27,12 @@ struct FormContentView<Content: View>: View {
                         } label: {
                             Image(systemName: "arrowtriangle.up.circle")
                                 .resizable()
-                                .foregroundColor(.marvelRed)
+                                .foregroundColor(.green)
                                 .frame(width: 20, height: 20, alignment: .center)
                                 .rotationEffect(.degrees(ishiddenBox ? 180 : 0))
                         }
                     }.padding(.all,10)
-                    Color.white
+                    Color.green
                         .padding(.horizontal,10)
                         .frame(minWidth: 0,maxWidth: .infinity,maxHeight:1,alignment: .leading)
                         .padding(.bottom,10)
@@ -81,7 +81,7 @@ struct FormDataTextCamp:View {
         case .Text:
             return .default
         case .number:
-            return .numberPad
+            return .decimalPad
         case .email:
             return .emailAddress
         }

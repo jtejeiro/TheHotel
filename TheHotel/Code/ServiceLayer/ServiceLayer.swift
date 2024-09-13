@@ -12,16 +12,9 @@ final class ServiceLayer: ObservableObject {
     
     static func callService<T: Decodable>(_ requestModel: RequestModel, _ modelType: T.Type) async throws -> T{
         
-        // Generate Marvel auth parameters
-        let authParams = requestModel.parametersConection
-        
-        // Merge query parameters with auth parameters
-        var combinedParams = requestModel.queryItems ?? [:]
-        combinedParams.merge(dict: authParams)
-        
         //Get query parameters
         var serviceUrl = URLComponents(string: requestModel.getURL())
-        serviceUrl?.queryItems =  buildQueryItems(params: combinedParams)
+        serviceUrl?.queryItems = buildQueryItems(params: requestModel.queryItems ?? [:])
         
         //Unwrap URL
         guard let componentURL = serviceUrl?.url else {

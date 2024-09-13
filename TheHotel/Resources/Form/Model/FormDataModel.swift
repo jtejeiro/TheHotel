@@ -11,11 +11,14 @@ import SwiftUI
 
 internal enum FormDataTypes {
     //  1
-    case heroName
-    case originalName
-    case typePower
-    case species
-    case cityDefeder
+    case userName
+    case Password
+    case publicationDay
+    case listPlace
+    case titlePlace
+    case commentPlace
+    case typePlace
+    case pricePlace
 }
 
 internal enum TypeTextfield {
@@ -30,14 +33,15 @@ final class FormDataModel:ObservableObject {
     var titleBox:String!
     var isRequire:Bool!
     var listFormString: [ListFormString] = []
-    public var errorMsg:String = "Form_Error_Generic"
+    public var errorMsg:String = "falta elemento requerido"
     public var inputText:String = ""
+    public var inputDate:Date = Date()
     public var iSErrorBox:Bool = false
     var isDisabled:Bool = false
     var typeTextfield:TypeTextfield = .Text
     var limitChart:Int = 0
     
-    init(id: FormDataTypes!, titleBox: String!, isRequire: Bool!,listFormString:[ListFormString] = [],errorMsg:String = "Form_Error_Generic", inputText:String = "" ,isDisabled:Bool = false, typeTextfield:TypeTextfield = .Text,limitChart:Int = 0) {
+    init(id: FormDataTypes!, titleBox: String!, isRequire: Bool!,listFormString:[ListFormString] = [],errorMsg:String = "falta elemento requerido", inputText:String = "" ,isDisabled:Bool = false, typeTextfield:TypeTextfield = .Text,limitChart:Int = 0) {
         self.id = id
         self.titleBox = titleBox
         self.isRequire = isRequire
@@ -87,6 +91,7 @@ final class FormDataModel:ObservableObject {
         return true
     }
     
+    
     func loadInputData(text:String?) {
         self.isDisabled = false
         self.inputText = text ?? ""
@@ -102,5 +107,4 @@ final class FormDataModel:ObservableObject {
 struct ListFormString:Identifiable {
     let id: Int
     let name:String
-    var icono:String = ""
 }

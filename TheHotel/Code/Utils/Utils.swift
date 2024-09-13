@@ -39,4 +39,29 @@ struct Utils {
         
         return formattedDateString
     }
+    
+    static func fromString(_ string: String, format: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale(identifier: "es_ES")
+        return dateFormatter.date(from: string)
+    }
+    
+    static func getDayOfTheWeek(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.locale = Locale(identifier: "es_ES")
+        let dayOfTheWeek = dateFormatter.string(from: date)
+        
+        return dayOfTheWeek
+    }
+    
+    static func getDay(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd"
+        dateFormatter.locale = Locale(identifier: "es_ES")
+        let dayOfTheWeek = dateFormatter.string(from: date)
+        
+        return dayOfTheWeek
+    }
 }

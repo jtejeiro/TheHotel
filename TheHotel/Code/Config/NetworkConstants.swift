@@ -46,27 +46,13 @@ final class NetworkConstants {
     }
     
     var apikey: String {
-        guard let apikey = plistNetworkConstants?["PublicKey"] as? String else {
+        guard let apikey = plistNetworkConstants?["apiKey"] as? String else {
             return ""
         }
         return apikey
     }
     
-    var publicKey: String {
-        guard let publicKey = plistNetworkConstants?["PublicKey"] as? String else {
-            return ""
-        }
-        return publicKey
-    }
-    
-    
-    var privateKey: String {
-        guard let privateKey = plistNetworkConstants?["PrivateKey"] as? String else {
-            return ""
-        }
-        return privateKey
-    }
-    
+
     var routeApi: String {
         guard let routeApi = plistNetworkConstants?["RouterApi"] as? String else {
             return ""
