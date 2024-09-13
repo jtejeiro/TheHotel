@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBMJePqF-k2DUcS_RwWVG72d2-Kc9o1Sk0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>103691537625</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>jt.TheHotel</string>
+	<key>PROJECT_ID</key>
+	<string>the-hotel-once</string>
+	<key>STORAGE_BUCKET</key>
+	<string>the-hotel-once.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:103691537625:ios:e3e5fc98de9f9c5c2e02c8</string>
+</dict>
+</plist>
