@@ -14,7 +14,7 @@ final class WeatherStatusLogic {
     var weatherModel:[WeatherModel]
     
     
-    init(_ interactor: WeatherInteractor = WeatherMock()) {
+    init(_ interactor: WeatherInteractor = WeatherProvider()) {
         self.interactor = interactor
         self.weatherModel = []
     }

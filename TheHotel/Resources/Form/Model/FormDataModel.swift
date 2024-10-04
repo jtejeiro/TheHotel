@@ -91,6 +91,11 @@ final class FormDataModel:ObservableObject {
         return true
     }
     
+    func setInputDate(date:Date){
+        self.inputDate = date
+        let textDate = date.toString(format: "d MMMM yyyy")
+        self.loadInputData(text: textDate)
+    }
     
     func loadInputData(text:String?) {
         self.isDisabled = false

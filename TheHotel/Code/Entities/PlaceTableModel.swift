@@ -13,7 +13,7 @@ class PlaceTableModel {
     @Attribute(.unique) var idPlace: UUID
     var title:String
     var comment:String
-    var typePlace:String
+    var typePlace:TypePlace
     var price:String
     var createDate:Date
     
@@ -21,36 +21,22 @@ class PlaceTableModel {
         self.idPlace = id
         self.title = title
         self.comment = comment
-        self.typePlace = typePlace.rawValue
+        self.typePlace = typePlace
         self.price = price
         self.createDate = Date.now
     }
     
     func getPlaceMapModel() -> PlaceModel {
-        let typePlaceLocal = TypePlace.getRawValue(text: self.typePlace)
-        return PlaceModel(id: self.idPlace, title: self.title, comment: self.comment, typePlace: typePlaceLocal, price: self.price)
+        return PlaceModel(id: self.idPlace, title: self.title, comment: self.comment, typePlace: self.typePlace, price: self.price)
     }
 }
 
-enum TypePlace:CaseIterable{
+enum TypePlace: String, Codable, CaseIterable{
     case Starters
     case firstCourse
     case dessert
     case drinks
     
-    
-    var rawValue: String {
-        switch self {
-        case .Starters:
-            return "Starters"
-        case .firstCourse:
-            return "firstCourse"
-        case .dessert:
-            return "dessert"
-        case .drinks:
-            return "drinks"
-        }
-    }
     var localizable: String {
         switch self {
         case .Starters:

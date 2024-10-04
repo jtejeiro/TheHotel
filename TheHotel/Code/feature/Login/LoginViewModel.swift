@@ -14,10 +14,11 @@ final class LoginViewModel:BaseViewModel {
     var showMainView: Bool = false
     
     // MARK: - Config
-    func configViewModel() {
+    func configViewModel() async {
         Task {
             do {
                 await setLoginFormList()
+                await loadMockMenuFormList()
             }
         }
     }
@@ -40,10 +41,6 @@ final class LoginViewModel:BaseViewModel {
         
         return list
     }
-    // MARK: - Load Data
-    func loadMenuFormList(_ id:Int) async {
-       
-    }
     
     // MARK: - Validate
     
@@ -52,8 +49,7 @@ final class LoginViewModel:BaseViewModel {
         
         loginFormList.forEach { model in
             if !model.getValide() {
-                debugPrint(model.errorMsg)
-                self.displayAlertMessage(title:"falta selecionar un elemento requerido", mesg: model.errorMsg)
+                self.displayAlertMessage(title:"falta usuario o contraseña", mesg: model.errorMsg)
                 isValidate = false
                 return
             }
@@ -63,29 +59,33 @@ final class LoginViewModel:BaseViewModel {
     }
     
     // MARK: - Fech Save dat
-    func insertMenuFormList() async {
+    func insertLoginFormList() async {
         let email = getLoginFormList(.userName).inputText
         let password = getLoginFormList(.Password).inputText
         
         Auth.auth().signIn(withEmail: email, password: password) { result , error in
-            if let result = result, error == nil {
-                debugPrint(result.user)
-                Globals.sharer.userName = result.user.email ?? email
+            if let resultSu = result, error == nil {
+                debugPrint(resultSu.user.email ?? email)
+                Globals.sharer.userName = resultSu.user.email ?? email
+                self.showMainView.toggle()
             } else {
                 self.displayAlertMessage(title: "Usuario no registrado")
             }
         }
     }
     
+    func loadMockMenuFormList() async {
+        getLoginFormList(.userName).inputText = "usern@gmail.com"
+        getLoginFormList(.Password).inputText = "123456"
+    }
+    
     func fechLoginData() async {
-        self.showMainView.toggle()
-//        Task {
-//            do {
-//                if await ValideLoginFormList() {
-//                    await insertMenuFormList()
-//                    self.showMainView.toggle()
-//                }
-//            }
-//        }
+        Task {
+            do {
+                if await ValideLoginFormList() {
+                    await insertLoginFormList()
+                }
+            }
+        }
     }
 }

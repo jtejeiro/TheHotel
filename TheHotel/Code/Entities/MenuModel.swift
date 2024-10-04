@@ -21,13 +21,15 @@ class MenuModel:Identifiable{
     }
     
     func getDayWeek() -> String {
-        debugPrint("publicationDay")
-        debugPrint(publicationDay)
        return Utils.getDayOfTheWeek(publicationDay)
     }
     
     func getDay() -> String {
         return Utils.getDay(publicationDay)
+    }
+    
+    static var test: MenuModel {
+        MenuModel(id: UUID(), publicationDay: .now, listPlace: [PlaceModel.test])
     }
     
 }

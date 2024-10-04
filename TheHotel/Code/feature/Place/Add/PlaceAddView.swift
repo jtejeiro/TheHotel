@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlaceAddView: View {
     @State var viewModel: PlaceAddViewModel
-    @State public var hiddenBackButton: Bool = false
+    @Environment(\.dismiss) private var dismiss
     
     init() {
         let viewModel = PlaceAddViewModel()
@@ -17,8 +17,9 @@ struct PlaceAddView: View {
     }
     
     var body: some View {
-        NavegationBarView($hiddenBackButton) {
-            ZStack {
+        ZStack {
+            Color.white.ignoresSafeArea()
+            VStack {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(alignment: .center) {
@@ -31,7 +32,7 @@ struct PlaceAddView: View {
                             .padding(.all,20)
                         
                         VStack(spacing: 15) {
-                           
+                            
                             
                             FormTextDataCamp()
                                 .environmentObject(viewModel.getPlaceFormList(.titlePlace))
@@ -43,20 +44,45 @@ struct PlaceAddView: View {
                             
                             FormTextDataCamp()
                                 .environmentObject(viewModel.getPlaceFormList(.pricePlace))
-                               
+                            
                         } .padding(.horizontal,20)
                         
                     }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 }
-                
-                ZStack(alignment: .bottom) {
+                VStack {
                     ButtonSaveMenu
-                }
+                }.ignoresSafeArea(.keyboard,edges: .bottom)
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
-        }
-        .onAppear{
-            viewModel.configViewModel()
+            .onAppear{
+                viewModel.configViewModel()
+            }
+            .toolbar {
+                
+                ToolbarItem(placement: .navigation) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        HStack(alignment: .center,spacing: 2) {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.green)
+                                .frame(width: 35, height: 35)
+                        }
+                    }
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Button(action: {
+                        print("button pressed")
+                    }) {
+                        Text("The Hotel")
+                            .font(.title)
+                            .bold()
+                            .foregroundStyle(.green)
+                    }.disabled(true)
+                }
+            }
+            .navigationBarBackButtonHidden(true)
         }
     }
     
@@ -67,6 +93,7 @@ struct PlaceAddView: View {
         Button {
             Task {
                 await viewModel.fechSaveData()
+    
             }
         } label: {
             ZStack {
@@ -91,7 +118,7 @@ struct PlaceAddView: View {
             .padding(.vertical,10)
             .padding(.horizontal,20)
         }
-        .navigationDestination(isPresented: $viewModel.showMainView) {
+        .navigationDestination(isPresented: $viewModel.showloadingView) {
             MenuAddView()
         }
     }

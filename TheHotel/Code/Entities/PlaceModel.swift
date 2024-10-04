@@ -29,4 +29,8 @@ class PlaceModel:Identifiable{
         self.price = price
         self.isCheck = isCheck
     }
+    
+    static var test: PlaceModel {
+        PlaceModel(id: UUID(), title: "Sopa de pollo", comment: "Sopa de pollo con maiz", typePlace: .Starters, price: "5,0" )
+    }
 }

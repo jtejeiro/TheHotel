@@ -12,12 +12,16 @@ final class MenuAddModelView:BaseViewModel {
     var menuFormList: [FormDataModel]  = []
     let menuTableLogic : MenuTableLogic
     let placeTableLogic : PlaceTableLogic
+    var menuModel: MenuModel?
     var listPlaceModel: [PlaceModel] = []
-    var showMainView: Bool = false
+    var showMenuView: Bool = false
     
-    init(menuTableLogic: MenuTableLogic =  MenuTableLogic.sharer, placeTableLogic: PlaceTableLogic = PlaceTableLogic.sharer ) {
+    init(menuTableLogic: MenuTableLogic =  MenuTableLogic.sharer, placeTableLogic: PlaceTableLogic = PlaceTableLogic.sharer, menuModel: MenuModel? = nil  ) {
         self.menuTableLogic = menuTableLogic
         self.placeTableLogic = placeTableLogic
+        if menuModel != nil {
+            self.menuModel = menuModel
+        }
     }
     
     // MARK: - Config
@@ -25,6 +29,9 @@ final class MenuAddModelView:BaseViewModel {
         Task {
             do {
                 await setMenuFormList()
+                if menuModel != nil {
+                    await loadMenuFormList()
+                }
             }
         }
     }
@@ -47,9 +54,17 @@ final class MenuAddModelView:BaseViewModel {
         
         return list
     }
-    // MARK: - Load Data
-    func loadMenuFormList(_ id:Int) async {
-       
+    
+    func loadMenuFormList() async {
+        debugPrint("loadMenuFormList")
+        guard let item = menuModel else {
+            return
+        }
+        
+        self.getMenuFormList(.publicationDay).setInputDate(date: item.publicationDay)
+        item.listPlace.forEach { model in
+            listPlaceModel.first(where: ({$0.id == model.id}))?.isCheck = true
+        }
     }
     
     // MARK: - Validate
@@ -70,6 +85,7 @@ final class MenuAddModelView:BaseViewModel {
             model.isCheck == true
         }){
             self.displayAlertMessage(title:"falta selecionar un elemento requerido", mesg: "falta selecionar Platos")
+            isValidate = false
         }
         
         return isValidate
@@ -88,16 +104,54 @@ final class MenuAddModelView:BaseViewModel {
         }
         let menuTableModel = MenuTableModel(publicationDay: publicationDay, listPlace: listPlace)
         await menuTableLogic.insert(model: menuTableModel)
+        showMenuView.toggle()
     }
+    
+    // MARK: - Fech Save dat
+    func UpdateMenuFormList() async {
+        guard let item = menuModel else {
+            return
+        }
+        
+        let publicationDay =  self.getMenuFormList(.publicationDay).inputDate
+        debugPrint(publicationDay)
+
+        let listPlace = listPlaceModel.filter
+        { model in
+            model.isCheck == true }
+        .map{ model in
+            model.id
+        }
+        let menuTableModel = MenuTableModel(id: item.id, publicationDay: publicationDay, listPlace: listPlace)
+        do {
+            try await menuTableLogic.update(model: menuTableModel)
+        } catch {
+            debugPrint("Error")
+        }
+        showMenuView.toggle()
+    }
+    
     
     @MainActor
     func fechSaveData(){
         Task {
             do {
                 if await ValideMenuFormList() {
-                    await insertMenuFormList()
-                    showMainView.toggle()
+                    if menuModel != nil {
+                        await UpdateMenuFormList()
+                    } else {
+                        await insertMenuFormList()
+                    }
+                    removeMenuFormList()
                 }
+            }
+        }
+    }
+    
+    func removeMenuFormList(){
+        DispatchQueue.main.async {
+            self.menuFormList.forEach { model in
+                model.resetInputData()
             }
         }
     }

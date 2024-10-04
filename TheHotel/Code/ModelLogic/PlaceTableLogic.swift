@@ -10,6 +10,7 @@ import SwiftData
 
 @Observable
 final class PlaceTableLogic:DatabaseService {
+    let interactor : DatabaseInterator
     static let sharer = PlaceTableLogic()
     var placeTableList : [PlaceTableModel]
     
@@ -55,16 +56,16 @@ final class PlaceTableLogic:DatabaseService {
         getPlaceTableModel()
     }
     
-    override init() {
-        self.placeTableList =  []
+    init(interactor: DatabaseInterator = DatabaseProvider()) {
+        self.interactor = interactor
+        self.placeTableList = []
     }
     
     @MainActor
     func getPlaceListModel()  async -> [PlaceModel] {
         getPlaceTableModel()
         return placeTableList.map { model in
-            let typePlace = TypePlace.getRawValue(text: model.typePlace)
-            return PlaceModel(id: model.idPlace, title: model.title, comment: model.comment, typePlace: typePlace, price: model.price)
+            return PlaceModel(id: model.idPlace, title: model.title, comment: model.comment, typePlace: model.typePlace, price: model.price)
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		465385F92C9AFA5A00578CD1 /* NavegationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465385F82C9AFA5A00578CD1 /* NavegationBarView.swift */; };
 		46A3A11D2C918C9000B4AC50 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3A11C2C918C9000B4AC50 /* MenuModel.swift */; };
 		46A3A11F2C919BE400B4AC50 /* MenuAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3A11E2C919BE400B4AC50 /* MenuAddView.swift */; };
 		46A8FF152C92590900D89750 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8FF142C92590900D89750 /* LoginView.swift */; };
@@ -39,7 +40,6 @@
 		46CF3E492C8F1512003076BF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E482C8F1512003076BF /* MainView.swift */; };
 		46CF3E4C2C8F15B1003076BF /* MenuListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E4B2C8F15B1003076BF /* MenuListView.swift */; };
 		46CF3E4E2C8F1C0A003076BF /* MyNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E4D2C8F1C0A003076BF /* MyNavigation.swift */; };
-		46CF3E5D2C8F695D003076BF /* NavegationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E5C2C8F695D003076BF /* NavegationBarView.swift */; };
 		46CF3E5F2C8F71AA003076BF /* MenuAddModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E5E2C8F71AA003076BF /* MenuAddModelView.swift */; };
 		46CF3E612C8F72DF003076BF /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E592C8F5134003076BF /* FormDataModel.swift */; };
 		46CF3E622C8F72E3003076BF /* FormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E542C8F5134003076BF /* FormContentView.swift */; };
@@ -52,10 +52,12 @@
 		46CF3E722C906C8E003076BF /* PlaceTableLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E712C906C8E003076BF /* PlaceTableLogic.swift */; };
 		46CF3E752C909530003076BF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 46CF3E742C909530003076BF /* FirebaseAuth */; };
 		46CF3E772C909ECA003076BF /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CF3E762C909ECA003076BF /* PlaceModel.swift */; };
+		46DFC3762CA5BEB5006A34A5 /* DatabaseInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DFC3752CA5BEB5006A34A5 /* DatabaseInterator.swift */; };
 		46F5D8012C9100EB002FFED3 /* MenuListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5D8002C9100EB002FFED3 /* MenuListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		465385F82C9AFA5A00578CD1 /* NavegationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavegationBarView.swift; sourceTree = "<group>"; };
 		46A3A11C2C918C9000B4AC50 /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
 		46A3A11E2C919BE400B4AC50 /* MenuAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddView.swift; sourceTree = "<group>"; };
 		46A8FF142C92590900D89750 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -94,13 +96,13 @@
 		46CF3E562C8F5134003076BF /* FormTextDataCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextDataCamp.swift; sourceTree = "<group>"; };
 		46CF3E572C8F5134003076BF /* FormTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextView.swift; sourceTree = "<group>"; };
 		46CF3E592C8F5134003076BF /* FormDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataModel.swift; sourceTree = "<group>"; };
-		46CF3E5C2C8F695D003076BF /* NavegationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavegationBarView.swift; sourceTree = "<group>"; };
 		46CF3E5E2C8F71AA003076BF /* MenuAddModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddModelView.swift; sourceTree = "<group>"; };
 		46CF3E682C8FA1F4003076BF /* ExtDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtDate.swift; sourceTree = "<group>"; };
 		46CF3E6B2C8FBE82003076BF /* PlaceAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddViewModel.swift; sourceTree = "<group>"; };
 		46CF3E6D2C9058C1003076BF /* PlaceAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddView.swift; sourceTree = "<group>"; };
 		46CF3E712C906C8E003076BF /* PlaceTableLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableLogic.swift; sourceTree = "<group>"; };
 		46CF3E762C909ECA003076BF /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		46DFC3752CA5BEB5006A34A5 /* DatabaseInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseInterator.swift; sourceTree = "<group>"; };
 		46F5D8002C9100EB002FFED3 /* MenuListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				46A8FF2B2C92D91900D89750 /* WeatherInteractor.swift */,
+				46DFC3752CA5BEB5006A34A5 /* DatabaseInterator.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -251,7 +254,7 @@
 				46A8FF2F2C92E80C00D89750 /* Mock */,
 				46A8FF182C9261EA00D89750 /* GoogleService-Info.plist */,
 				46CF3E4D2C8F1C0A003076BF /* MyNavigation.swift */,
-				46CF3E5C2C8F695D003076BF /* NavegationBarView.swift */,
+				465385F82C9AFA5A00578CD1 /* NavegationBarView.swift */,
 				46CF3E5B2C8F5134003076BF /* Form */,
 			);
 			path = Resources;
@@ -465,6 +468,7 @@
 				46A8FF272C92D3E700D89750 /* NetworkError.swift in Sources */,
 				46CF3E202C8EF798003076BF /* ContentView.swift in Sources */,
 				46A8FF2C2C92D91900D89750 /* WeatherInteractor.swift in Sources */,
+				465385F92C9AFA5A00578CD1 /* NavegationBarView.swift in Sources */,
 				46A8FF282C92D3EA00D89750 /* RequestModel.swift in Sources */,
 				46CF3E642C8F72EA003076BF /* FormTextDataCamp.swift in Sources */,
 				46CF3E492C8F1512003076BF /* MainView.swift in Sources */,
@@ -483,11 +487,11 @@
 				46CF3E722C906C8E003076BF /* PlaceTableLogic.swift in Sources */,
 				46CF3E3F2C8F0FED003076BF /* MenuTableLogic.swift in Sources */,
 				46CF3E622C8F72E3003076BF /* FormContentView.swift in Sources */,
-				46CF3E5D2C8F695D003076BF /* NavegationBarView.swift in Sources */,
 				46CF3E772C909ECA003076BF /* PlaceModel.swift in Sources */,
 				46A8FF172C92593600D89750 /* LoginViewModel.swift in Sources */,
 				46CF3E1E2C8EF798003076BF /* TheHotelApp.swift in Sources */,
 				46A8FF3A2C94977400D89750 /* WeatherMapViewModel.swift in Sources */,
+				46DFC3762CA5BEB5006A34A5 /* DatabaseInterator.swift in Sources */,
 				46A8FF152C92590900D89750 /* LoginView.swift in Sources */,
 				46CF3E412C8F11EE003076BF /* Utils.swift in Sources */,
 				46CF3E612C8F72DF003076BF /* FormDataModel.swift in Sources */,
@@ -635,8 +639,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -669,8 +674,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

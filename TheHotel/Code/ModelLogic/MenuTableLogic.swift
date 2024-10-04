@@ -10,6 +10,7 @@ import SwiftData
 
 @Observable
 final class MenuTableLogic:DatabaseService {
+    let interactor : DatabaseInterator
     static let sharer = MenuTableLogic()
     var menuTableList : [MenuTableModel]
     
@@ -30,6 +31,11 @@ final class MenuTableLogic:DatabaseService {
     }
     
     @MainActor
+    func update(model:MenuTableModel) throws {
+        self.insert(model: model)
+    }
+    
+    @MainActor
     func deleteAllData() {
         menuTableList.forEach { model in
             modelContext.delete(model)
@@ -39,8 +45,9 @@ final class MenuTableLogic:DatabaseService {
         getMenuTableModel()
     }
     
-    override init() {
-        self.menuTableList =  []
+    init(interactor: DatabaseInterator = DatabaseProvider()) {
+        self.interactor = interactor
+        self.menuTableList = []
     }
     
     @MainActor
@@ -74,6 +81,34 @@ final class MenuTableLogic:DatabaseService {
                 return nil
             }
     }
+    
+    @MainActor
+    func deleteIdMenu(by id: UUID) async {
+        menuTableList.forEach { model in
+            if model.idMenun == id {
+                modelContext.delete(model)
+            }
+        }
+        try? modelContext.save()
+        menuTableList = []
+        getMenuTableModel()
+    }
+    
+//    @MainActor
+//    func loadIdMenu(model:MenuTableModel) {
+//        let request = FetchDescriptor<MenuTableModel>(predicate: #Predicate<MenuTableModel>{ item in
+//            item.idMenun == model.idMenun
+//        })
+//        do {
+//            let results = try interactor.modelContext.fetch(request)
+//            interactor.modelContext.insert(re)
+//        } catch {
+//            print("Error al buscar el PlaceModel: \(error)")
+//        }
+//        
+//        menuTableList = []
+//        getMenuTableModel()
+//    }
    
 }
 

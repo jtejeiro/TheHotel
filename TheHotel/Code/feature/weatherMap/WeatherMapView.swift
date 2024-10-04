@@ -10,6 +10,8 @@ import MapKit
 
 struct WeatherMapView: View {
     @State var viewModel: WeatherMapViewModel
+    @Environment(\.dismiss) private var dismiss
+    @State var showBackView: Bool = false
     
     // Configura la región centrada en Madrid
     @State private var region = MKCoordinateRegion(
@@ -25,7 +27,6 @@ struct WeatherMapView: View {
     
     var body: some View {
         // Muestra el mapa
-        NavegationBarView {
             ZStack(alignment: .top) {
                 Map(initialPosition: .region(region))
                     .mapStyle(.hybrid)
@@ -36,10 +37,35 @@ struct WeatherMapView: View {
                 
             }.onAppear{
                 Task {
-                    viewModel.configViewModel()
+                   await viewModel.configViewModel()
                 }
             }
-        }
+            .toolbar {
+                
+                ToolbarItem(placement: .navigation) {
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            HStack(alignment: .center,spacing: 2) {
+                                Image(systemName: "chevron.left")
+                                    .foregroundColor(.green)
+                                    .frame(width: 35, height: 35)
+                            }
+                        }
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Button(action: {
+                        print("button pressed")
+                    }) {
+                        Text("The Hotel")
+                            .font(.title)
+                            .bold()
+                            .foregroundStyle(.green)
+                    }.disabled(true)
+                }
+            }
+            .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -49,33 +75,36 @@ struct WeatherTempView: View {
     var body: some View{
         ZStack {
             VStack(spacing: 15){
+                Spacer().frame(height: 1)
+                Button {
+                    Task {
+                        do {
+                            try await viewModel.fechWeatherStatusData()
+                        }
+                    }
+                } label: {
+                    HStack {
+                        Spacer()
+                        Spacer()
+                        Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
+                            .resizable()
+                            .frame(width: 15, height: 15)
+                            .foregroundStyle(.black)
+                        Spacer().frame(width: 20)
+                    }
+                }
                 HStack {
                     Spacer()
-                    switch viewModel.terraceStatus {
-                    case .openTerrace:
-                        Image(systemName: "sun.max.fill")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                    case .closeTerrace:
-                        Image(systemName: "cloud.rain.fill")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                    case .snowTerrace:
-                        Image(systemName: "snowflake")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                    case .nullTerrace:
-                        Image(systemName: "thermometer.variable.and.figure")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                    }
+                    Image(systemName: viewModel.terraceStatus.ImgName)
+                        .resizable()
+                        .frame(width: 20, height: 20)
                     Spacer()
                     Text(viewModel.tempDay)
                         .font(.title)
                         .foregroundStyle(.black)
                     Spacer()
                 }
-                Color.green.frame(height: 1)
+                Color.init(viewModel.terraceStatus.color).frame(height: 1)
                 HStack {
                     Spacer()
                     Text("Probabilidad")
@@ -94,14 +123,14 @@ struct WeatherTempView: View {
                     Spacer()
                 }
                 .padding(.vertical,2)
-                .background(Color.green)
+                .background(viewModel.terraceStatus.color)
                 
                 
             }
             .background {
                 RoundedRectangle(cornerRadius: 0.0)
                     .stroke(lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.green)
+                    .foregroundColor(viewModel.terraceStatus.color)
             }
             .padding(.all, 30)
             .background(Color.white.opacity(0.8))

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 @Observable
 final class MainViewModel:BaseViewModel {
@@ -20,7 +21,7 @@ final class MainViewModel:BaseViewModel {
     }
     
     // MARK: - Config
-    func configViewModel() {
+    func configViewModel() async {
         Task {
             do {
                 try await fechWeatherStatusData()
@@ -30,6 +31,7 @@ final class MainViewModel:BaseViewModel {
     
     // MARK: - Set Data
     func fechWeatherStatusData() async throws {
+        self.terraceStatus = .nullTerrace
         do {
             let weatherModel = try await weatherStatusLogic.fechWeatherStatus()
             debugPrint(weatherModel.forecast.forecastday[0].day.avgtempc)
@@ -73,6 +75,32 @@ enum TerraceStatus {
             return "Revisar clima"
         case .snowTerrace:
             return "Cerrar Terraza"
+        }
+    }
+    
+    var ImgName: String {
+        switch self {
+        case .openTerrace:
+            return "sun.max.fill"
+        case .closeTerrace:
+            return "cloud.rain.fill"
+        case .nullTerrace:
+            return "thermometer.variable.and.figure"
+        case .snowTerrace:
+            return "snowflake"
+        }
+    }
+    
+    var color: Color {
+        switch self {
+        case .openTerrace:
+            return .green
+        case .closeTerrace:
+            return .red
+        case .nullTerrace:
+            return .black
+        case .snowTerrace:
+            return .cyan
         }
     }
 }

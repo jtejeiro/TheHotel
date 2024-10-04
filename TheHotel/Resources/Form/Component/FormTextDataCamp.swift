@@ -7,6 +7,51 @@
 
 import SwiftUI
 
+struct FormDataCamp {
+   @EnvironmentObject var model: FormDataModel
+    
+}
+
+extension FormDataCamp {
+    
+    static func formText(@Binding model:FormDataModel) -> some View {
+        return FormTextView(
+            inputText: $model.inputText,
+            placeHolder: model.getPlaceholder(),
+            keyboardType: self.getTypekeyboard(model: model),
+            disabled: $model.isDisabled ,
+            isError: $model.iSErrorBox,
+            limiteChart: model.limitChart)
+            .onChange(of: model.inputText) {oldValue, value in
+                debugPrint(model.inputText)
+            }
+    }
+    
+    static func formSecureField(@Binding model:FormDataModel) -> some View {
+        return FormSecureField(
+            inputText: $model.inputText,
+            placeHolder: model.getPlaceholder(),
+            keyboardType: self.getTypekeyboard(model: model),
+            disabled: $model.isDisabled ,
+            isError: $model.iSErrorBox,
+            limiteChart: model.limitChart)
+            .onChange(of: model.inputText) {oldValue, value in
+                debugPrint(model.inputText)
+            }
+    }
+    
+    static func getTypekeyboard(model:FormDataModel)-> UIKeyboardType {
+        switch model.typeTextfield {
+        case .Text:
+            return .default
+        case .number:
+            return .numberPad
+        case .email:
+            return .emailAddress
+        }
+    }
+}
+
 struct FormTextDataCamp:View {
     @EnvironmentObject var model: FormDataModel
     

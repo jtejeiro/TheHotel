@@ -10,14 +10,15 @@ import SwiftUI
 struct MenuListView: View {
     @State var viewModel: MenuListViewModel
     @State var showSecondView: Bool = false
+    @Binding var editButton: Bool
     
-    init() {
-        let viewModel = MenuListViewModel()
+    init(_ viewModel:MenuListViewModel = MenuListViewModel(),
+         editButton: Binding<Bool> ) {
         self._viewModel =  State(wrappedValue: viewModel)
+        self._editButton = editButton
     }
     
     var body: some View {
-        NavegationBarView() {
             ZStack(alignment:.top) {
                 ScrollView {
                     VStack(alignment: .center, spacing: 0)  {
@@ -43,9 +44,10 @@ struct MenuListView: View {
                         }.padding(.all,20)
                         
                         VStack(spacing: 20) {
-                            MenuListCamp()
+                            MenuListCamp(editButton: $editButton)
                                 .environment(viewModel)
                             ButtonEmptyView
+                            Spacer()
                         }
                         
                         
@@ -59,29 +61,32 @@ struct MenuListView: View {
                 }
                 
             }
-        }
     }
     
+    
+    
     var ButtonEmptyView: some View {
-        Button {
-            showSecondView.toggle()
-        } label: {
-            ZStack {
-                VStack(spacing: 10) {
-                    Image(systemName: "plus.circle.fill") .resizable()
-                        .frame(width: 40,height: 40)
-                        .foregroundStyle(.green)
-
-                    Text("Crea Menu")
-                        .font(.title2)
-                        .foregroundStyle(.green)
+        NavigationStack{
+            Button {
+                showSecondView.toggle()
+            } label: {
+                ZStack {
+                    VStack(spacing: 10) {
+                        Image(systemName: "plus.circle.fill") .resizable()
+                            .frame(width: 40,height: 40)
+                            .foregroundStyle(.green)
+                        
+                        Text("Crea Menu")
+                            .font(.title2)
+                            .foregroundStyle(.green)
+                    }
                 }
-            }
-            .frame(width: 350,height: 100)
-            .background {
-                RoundedRectangle(cornerRadius: 5.0)
-                    .stroke(lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.green)
+                .frame(width: 350,height: 100)
+                .background {
+                    RoundedRectangle(cornerRadius: 5.0)
+                        .stroke(lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.green)
+                }
             }
         }
         .navigationDestination(isPresented: $showSecondView) {
@@ -92,6 +97,7 @@ struct MenuListView: View {
 }
 struct MenuListCamp: View {
     @Environment(MenuListViewModel.self) var viewModel
+    @Binding var editButton: Bool
     
     fileprivate func headerCell(_ header: MenuModel) -> some View {
         return HStack(alignment: .center) {
@@ -144,27 +150,61 @@ struct MenuListCamp: View {
         .padding(.horizontal,20)
     }
     
+    
+    fileprivate func editButtonCell(_ cell: MenuModel) -> some View {
+        return VStack(alignment: .leading, spacing: 5) {
+            HStack {
+                NavigationLink {
+                        MenuAddView(cell)
+                } label: {
+                    Image(systemName: "pencil.circle")
+                        .resizable()
+                        .frame(width: 20,height: 20)
+                        .foregroundStyle(.green)
+                }
+                Spacer()
+                Button {
+                    Task {
+                        do {
+                            await viewModel.deleteMenuModelList(id: cell.id)
+                        }
+                    }
+                } label: {
+                    Image(systemName: "trash.circle")
+                        .resizable()
+                        .frame(width: 20,height: 20)
+                        .foregroundStyle(.green)
+                }
+            }
+        }
+        .padding(.horizontal,20)
+    }
     var body: some View {
         VStack(spacing: 15) {
-            ForEach(viewModel.listMenuModel){ header in
-                self.headerCell(header)
-                
-                ForEach(header.listPlace.sorted(by: {$0.typePlace.position<$1.typePlace.position})){ cell in
-                    
-                    let firstCategoriId = header.listPlace.first(where: {$0.typePlace == cell.typePlace})?.id ?? UUID()
-                    
-                    if firstCategoriId == cell.id {
-                        self.headerBodyCell(cell)
+            if viewModel.processState == .display {
+                ForEach(viewModel.listMenuModel){ header in
+                    if editButton {
+                        self.editButtonCell(header)
                     }
+                    self.headerCell(header)
                     
-                    let lastCategoriId = header.listPlace.last(where: {$0.typePlace == cell.typePlace})?.id ?? UUID()
-                    
-                    self.bodyCell(cell)
-                    
-                    if lastCategoriId == cell.id {
-                        Color.black
-                            .frame(height: 1)
-                            .padding(.horizontal,20)
+                    ForEach(header.listPlace.sorted(by: {$0.typePlace.position<$1.typePlace.position})){ cell in
+                        
+                        let firstCategoriId = header.listPlace.first(where: {$0.typePlace == cell.typePlace})?.id ?? UUID()
+                        
+                        if firstCategoriId == cell.id {
+                            self.headerBodyCell(cell)
+                        }
+                        
+                        let lastCategoriId = header.listPlace.last(where: {$0.typePlace == cell.typePlace})?.id ?? UUID()
+                        
+                        self.bodyCell(cell)
+                        
+                        if lastCategoriId == cell.id {
+                            Color.black
+                                .frame(height: 1)
+                                .padding(.horizontal,20)
+                        }
                     }
                 }
             }
@@ -175,5 +215,5 @@ struct MenuListCamp: View {
 
 
 #Preview {
-    MenuAddView()
+    MenuListView(editButton: .constant(true))
 }

@@ -12,10 +12,10 @@ struct MyNavigation<Content>: View where Content: View {
     
     var body: some View {
         if #available(iOS 16, *) {
-            NavigationStack(root: content).navigationBarBackButtonHidden(true)
+            NavigationStack(root: content)
         } else {
             NavigationView(content: content)
-                .navigationViewStyle(.stack).navigationBarTitle("", displayMode:.inline).navigationBarHidden(true)
+                .navigationViewStyle(.stack)
         }
     }
 }

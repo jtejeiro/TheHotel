@@ -17,6 +17,10 @@ struct TheHotelApp: App {
             ContentView()
         }
     }
+    
+    init() {
+        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+    }
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {

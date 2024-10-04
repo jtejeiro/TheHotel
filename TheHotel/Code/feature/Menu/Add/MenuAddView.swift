@@ -9,47 +9,123 @@ import SwiftUI
 
 struct MenuAddView: View {
     @State var viewModel: MenuAddModelView
-    @State public var hiddenBackButton: Bool = false
+    @State var showMainView: Bool = false
     
-    init() {
-        let viewModel = MenuAddModelView()
+    init(_ menuModel: MenuModel? = nil ) {
+        debugPrint("---MenuModel---")
+        debugPrint(menuModel)
+        let viewModel = menuModel == nil ? MenuAddModelView(): MenuAddModelView(menuModel:menuModel)
         self._viewModel =  State(wrappedValue: viewModel)
     }
     
     var body: some View {
-        NavegationBarView($hiddenBackButton) {
-            ZStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Text("Crea Menú")
-                            .font(.title)
-                            .foregroundStyle(.white)
-                        Spacer()
-                    }.background(Color.green)
-                     .padding(.all,20)
+        ZStack {
+            Color.white.ignoresSafeArea()
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        HStack(alignment: .center) {
+                            Spacer()
+                            Text("Crea Menú")
+                                .font(.title)
+                                .foregroundStyle(.white)
+                            Spacer()
+                        }.background(Color.green)
+                            .padding(.all,20)
+                        
+                        FormDateCamp(timetype: .BeforeNow)
+                            .environmentObject(viewModel.getMenuFormList(.publicationDay))
+                            .padding(.all,20)
+                        
+                        PlaceListView()
+                            .environment(viewModel)
+                    }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                     
-                    FormDateCamp(timetype: .BeforeNow)
-                        .environmentObject(viewModel.getMenuFormList(.publicationDay))
-                        .padding(.all,20)
-                    
-                    PlaceListView()
-                        .environment(viewModel)
+                }
+                ZStack(alignment: .bottom) {
+                    ButtonSaveMenu
                 }
                 
             }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-        }
-        .onAppear{
-            viewModel.configViewModel()
-        }
-        .alert(isPresented: $viewModel.isAlertbox) {
-            Alert(
-                title: Text(viewModel.alertTitle),
-                message: Text(viewModel.alertMessage),
-                dismissButton: .cancel(Text(viewModel.alertButton)))
+            .onAppear{
+                viewModel.configViewModel()
+            }
+            .toolbar {
+                
+                
+                ToolbarItem(placement: .navigation) {
+                    Button(action: {
+                        showMainView.toggle()
+                    }) {
+                        HStack(alignment: .center,spacing: 2) {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.green)
+                                .frame(width: 35, height: 35)
+                        }
+                    }
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Button(action: {
+                        print("button pressed")
+                    }) {
+                        Text("The Hotel")
+                            .font(.title)
+                            .bold()
+                            .foregroundStyle(.green)
+                    }.disabled(true)
+                }
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $showMainView) {
+                MainView()
+            }
+            .alert(isPresented: $viewModel.isAlertbox) {
+                Alert(
+                    title: Text(viewModel.alertTitle),
+                    message: Text(viewModel.alertMessage),
+                    dismissButton: .cancel(Text(viewModel.alertButton)))
+            }
         }
     }
+}
+
+extension MenuAddView {
+    var ButtonSaveMenu: some View {
+        @Bindable var show = viewModel
+        
+        return Button {
+            Task {
+                await viewModel.fechSaveData()
+            }
+        } label: {
+            ZStack {
+                HStack(spacing: 20) {
+                    Spacer()
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .frame(width: 20,height: 20)
+                        .foregroundStyle(.white)
+
+                    Text("Cargar Menu ")
+                        .font(.title2)
+                        .foregroundStyle(.white)
+                    Spacer()
+                }
+            }
+            .frame(height: 40)
+            .background {
+                RoundedRectangle(cornerRadius: 5.0)
+                    .foregroundColor(.green)
+            }
+            .padding(.vertical,10)
+            .padding(.horizontal,20)
+        }
+        .navigationDestination(isPresented: $show.showMenuView) {
+            MainView()
+        }
+    }
+    
 }
 
 struct PlaceListView: View {
@@ -77,9 +153,6 @@ struct PlaceListView: View {
                         }
                     }
                 }
-            }
-            ZStack(alignment: .bottom) {
-                ButtonSaveMenu
             }
         }
     }
@@ -121,40 +194,7 @@ struct PlaceListView: View {
             .environment(viewModel.getMenuFormList(.listPlace))
     }
     
-    var ButtonSaveMenu: some View {
-        @Bindable var show = viewModel
-        
-        return Button {
-            Task {
-                await viewModel.fechSaveData()
-            }
-        } label: {
-            ZStack {
-                HStack(spacing: 20) {
-                    Spacer()
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .frame(width: 20,height: 20)
-                        .foregroundStyle(.white)
-
-                    Text("Cargar Menu ")
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                    Spacer()
-                }
-            }
-            .frame(height: 40)
-            .background {
-                RoundedRectangle(cornerRadius: 5.0)
-                    .foregroundColor(.green)
-            }
-            .padding(.vertical,10)
-            .padding(.horizontal,20)
-        }
-        .navigationDestination(isPresented: $show.showMainView) {
-            MainView()
-        }
-    }
+   
     
 }
 

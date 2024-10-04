@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @State var viewModel: LoginViewModel
+    @State var hiddenButton: Bool = true
     
     init() {
         let viewModel = LoginViewModel()
@@ -16,11 +17,27 @@ struct LoginView: View {
     }
     
     var body: some View {
-        NavegationBarView() {
-            ZStack {
-                Color.white.ignoresSafeArea()
+        ZStack {
+            Color.white.ignoresSafeArea()
+            VStack(alignment: .leading, spacing: 0) {
                 VStack(spacing:15){
                     Spacer()
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Text("The Hotel")
+                            .font(.title)
+                            .foregroundStyle(.green)
+                            .bold()
+                        Spacer()
+                    }.padding(.all,20)
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Text("Coloca tu usuario")
+                            .font(.title2)
+                            .foregroundStyle(.black)
+                        Spacer()
+                    }.padding(.horizontal,20)
+                    
                     FormTextDataCamp()
                         .environmentObject(viewModel.getLoginFormList(.userName))
                     FormSecureFieldCamp()
@@ -28,15 +45,22 @@ struct LoginView: View {
                     ButtonSaveMenu
                     Spacer()
                 }.padding(.all,20)
-            }.onAppear{
-                viewModel.configViewModel()
+                Spacer()
+                Spacer()
             }
-            .alert(isPresented: $viewModel.isAlertbox) {
-                Alert(
-                    title: Text(viewModel.alertTitle),
-                    message: Text(viewModel.alertMessage),
-                    dismissButton: .cancel(Text(viewModel.alertButton)))
+        }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+        
+        .onAppear{
+            Task {
+                await viewModel.configViewModel()
             }
+        }
+        .alert(isPresented: $viewModel.isAlertbox) {
+            Alert(
+                title: Text(viewModel.alertTitle),
+                message: Text(viewModel.alertMessage),
+                dismissButton: .cancel(Text(viewModel.alertButton)))
         }
     }
     
@@ -55,6 +79,7 @@ struct LoginView: View {
                         .foregroundStyle(.white)
                     Spacer()
                 }
+
             }
             .frame(height: 40)
             .background {
@@ -67,6 +92,8 @@ struct LoginView: View {
             MainView()
         }
     }
+    
+    
 }
 
 #Preview {

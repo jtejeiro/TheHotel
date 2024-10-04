@@ -20,7 +20,7 @@ final class WeatherMapViewModel:BaseViewModel {
     }
     
     // MARK: - Config
-    func configViewModel() {
+    func configViewModel() async {
         Task {
             do {
                 try await fechWeatherStatusData()

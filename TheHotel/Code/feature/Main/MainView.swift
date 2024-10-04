@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @State var viewModel: MainViewModel
     @State public var hiddenBackButton: Bool = true
+    @State public var editButton: Bool = false
     
     init() {
         let viewModel = MainViewModel()
@@ -17,7 +18,6 @@ struct MainView: View {
     }
     
     var body: some View {
-        NavegationBarView($hiddenBackButton) {
             ZStack {
                 Color.white.ignoresSafeArea()
                 ScrollView {
@@ -25,15 +25,39 @@ struct MainView: View {
                         HeaderView
                         WeatherStatusView()
                             .environment(viewModel)
-                        MenuListView()
+                        MenuListView(editButton: $editButton)
                     }
                 }
             }.onAppear{
                 Task {
-//                    viewModel.configViewModel()
+                    await viewModel.configViewModel()
+                }
+            }.toolbar {
+                ToolbarItem(placement: .principal) {
+                    Button(action: {
+                        print("button pressed")
+                    }) {
+                        Text("The Hotel")
+                            .font(.title)
+                            .bold()
+                            .foregroundStyle(.green)
+                    }.disabled(true)
+                }
+                
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: {
+                        print("button pressed")
+                        self.editButton.toggle()
+                    }) {
+                        HStack(alignment: .center,spacing: 2) {
+                            Image(systemName: "pencil.tip.crop.circle")
+                                .foregroundColor(.green)
+                                .frame(width: 35, height: 35)
+                        }
+                    }
                 }
             }
-        }
+            .navigationBarBackButtonHidden(true)
     }
     
     var HeaderView: some View {
@@ -64,35 +88,37 @@ struct WeatherStatusView: View {
     @State var showMapPage:Bool = false
     
     var body: some View{
-        VStack(spacing: 15){
+        VStack(spacing: 10){
             Color.clear.frame(height: 1)
+            Button {
+                Task {
+                    do {
+                        try await viewModel.fechWeatherStatusData()
+                    }
+                }
+            } label: {
+                HStack {
+                    Spacer()
+                    Spacer()
+                    Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
+                        .resizable()
+                        .frame(width: 15, height: 15)
+                        .foregroundStyle(.black)
+                    Spacer().frame(width: 20)
+                }
+            }
             HStack {
                 Spacer()
-                switch viewModel.terraceStatus {
-                case .openTerrace:
-                    Image(systemName: "sun.max.fill")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                case .closeTerrace:
-                    Image(systemName: "cloud.rain.fill")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                case .snowTerrace:
-                    Image(systemName: "snowflake")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                case .nullTerrace:
-                    Image(systemName: "thermometer.variable.and.figure")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                }
+                Image(systemName: viewModel.terraceStatus.ImgName)
+                    .resizable()
+                    .frame(width: 20, height: 20)
                 Spacer()
                 Text(viewModel.tempDay)
                     .font(.title)
                     .foregroundStyle(.black)
                 Spacer()
             }
-            Color.green.frame(height: 1)
+            Color.init(viewModel.terraceStatus.color).frame(height: 1)
             HStack {
                 Spacer()
                 Text("Probabilidad")
@@ -111,31 +137,30 @@ struct WeatherStatusView: View {
                 Spacer()
             }
             .padding(.vertical,2)
-            .background(Color.green)
-            
-            Button {
-                showMapPage.toggle()
-            } label: {
-                HStack {
-                    Spacer()
-                    Text("Mostra Mapa del tiempo")
-                        .font(.title3)
-                        .underline()
-                        .foregroundStyle(.green)
-                    Spacer()
-                }
-            }
+            .background(viewModel.terraceStatus.color)
 
-           
         }
         .background {
             RoundedRectangle(cornerRadius: 0.0)
                 .stroke(lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
-                .foregroundColor(.green)
+                .foregroundColor(viewModel.terraceStatus.color)
         }
         .padding(.all, 20)
         .navigationDestination(isPresented: $showMapPage) {
             WeatherMapView()
+        }
+        
+        Button {
+            showMapPage.toggle()
+        } label: {
+            HStack {
+                Spacer()
+                Text("Mostra Mapa del tiempo")
+                    .font(.title3)
+                    .underline()
+                    .foregroundStyle(.green)
+                Spacer()
+            }
         }
         
     }

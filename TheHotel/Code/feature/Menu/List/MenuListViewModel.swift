@@ -34,6 +34,20 @@ final class MenuListViewModel:BaseViewModel {
         await listMenuModel = menuTableLogic.getMenuListModel().sorted(by: { $0.publicationDay<$1.publicationDay})
     }
     
+    // MARK: - Set Data
+    func deleteMenuModelList(id:UUID) async {
+        self.processState = .emptyDisplay
+        Task {
+            do {
+                await menuTableLogic.deleteIdMenu(by: id)
+                listMenuModel.removeAll()
+                await setMenuModelList()
+            }
+        }
+        self.processState = .display
+    }
+    
+    
     
 
 }

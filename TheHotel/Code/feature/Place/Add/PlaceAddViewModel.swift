@@ -11,7 +11,7 @@ import Foundation
 final class PlaceAddViewModel:BaseViewModel {
     let placeTableLogic : PlaceTableLogic
     var placeFormList: [FormDataModel]  = []
-    var showMainView: Bool = false
+    var showloadingView: Bool = false
     
     init(placeTableLogic: PlaceTableLogic = PlaceTableLogic.sharer) {
         self.placeTableLogic = placeTableLogic
@@ -83,7 +83,7 @@ final class PlaceAddViewModel:BaseViewModel {
                 self.displayLoading(true)
                 if await ValidePlaceFormList() {
                     await insertPlaceFormList()
-                    showMainView.toggle()
+                    showloadingView.toggle()
                     removePlaceFormList()
                 }
                 self.displayLoading()
